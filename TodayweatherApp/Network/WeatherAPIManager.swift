@@ -7,8 +7,14 @@
 
 import Foundation
 
+import Alamofire
+
 final class WeatherAPIManager {
     static let shared = WeatherAPIManager()
     
     private init() { }
+    
+    func requestSomething() {
+        
+    }
 }
