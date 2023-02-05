@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var text: String = "hi 😎"
+    @StateObject private var network = WeatherAPIManager.shared
+    
     var body: some View {
-        Text("test")
+        List {
+            ForEach(network.weathers, id: \.self) { result in
+                Text("\(result.category): \(result.obsrValue)")
+            }
+        }.onAppear {
+            network.requestSomething(date: Date())
+        }
     }
 }
 

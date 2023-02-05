@@ -7,13 +7,13 @@
 
 import Foundation
 
-final class WeatherAPIManager: NSObject {
+final class WeatherAPIManager: NSObject, ObservableObject {
     static let shared = WeatherAPIManager()
     
     var tagType: TagType = .none
     var isLock = true
     var tempModel: Item?
-    var weathers: [Item] = []
+    @Published var weathers: [Item] = []
     
     private let dateFormatter: DateFormatter = {
         let f = DateFormatter()
@@ -31,15 +31,13 @@ final class WeatherAPIManager: NSObject {
             let xmlParser = XMLParser(contentsOf: URL(string: url)!)
             xmlParser!.delegate = self
             xmlParser!.parse()
-            
-            completionHandler("\(self.weathers)")
         }
     }
 }
 
 extension WeatherAPIManager: XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-
+        
         if elementName == "item" {
             isLock = true
             tempModel = Item.init()
@@ -85,7 +83,7 @@ extension WeatherAPIManager: XMLParserDelegate {
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         let parseString = string.trimmingCharacters(in: .whitespacesAndNewlines)
-
+        
         if isLock {
             switch tagType {
             case .numberOfRows:
@@ -135,7 +133,7 @@ enum TagType {
     case none
 }
 
-struct Item {
+struct Item: Hashable {
     var numberOfRows: String
     var pageNo: String
     var totalCount: String
