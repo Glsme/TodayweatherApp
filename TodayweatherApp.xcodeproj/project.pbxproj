@@ -12,9 +12,9 @@
 		8565BEAE298BF05700CBD52B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8565BEAD298BF05700CBD52B /* Assets.xcassets */; };
 		8565BEB1298BF05700CBD52B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8565BEB0298BF05700CBD52B /* Preview Assets.xcassets */; };
 		8565BEBA298E947900CBD52B /* WeatherAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEB9298E947900CBD52B /* WeatherAPIManager.swift */; };
-		8565BEBD298E953C00CBD52B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8565BEBC298E953C00CBD52B /* Alamofire */; };
 		8565BEBF298E95AB00CBD52B /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8565BEBE298E95AB00CBD52B /* .gitignore */; };
 		8565BEC2298E95D400CBD52B /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEC1298E95D400CBD52B /* APIKey.swift */; };
+		8565BEC5298E986800CBD52B /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEC4298E986800CBD52B /* EndPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +27,7 @@
 		8565BEB9298E947900CBD52B /* WeatherAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPIManager.swift; sourceTree = "<group>"; };
 		8565BEBE298E95AB00CBD52B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8565BEC1298E95D400CBD52B /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		8565BEC4298E986800CBD52B /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -34,7 +35,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8565BEBD298E953C00CBD52B /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +61,7 @@
 		8565BEA8298BF05500CBD52B /* TodayweatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				8565BEC3298E986000CBD52B /* EndPoint */,
 				8565BEB8298E946200CBD52B /* Network */,
 				8565BEB7298BF74F00CBD52B /* Info.plist */,
 				8565BEA9298BF05500CBD52B /* TodayweatherAppApp.swift */,
@@ -96,6 +97,14 @@
 			path = APIKey;
 			sourceTree = "<group>";
 		};
+		8565BEC3298E986000CBD52B /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				8565BEC4298E986800CBD52B /* EndPoint.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,7 +122,6 @@
 			);
 			name = TodayweatherApp;
 			packageProductDependencies = (
-				8565BEBC298E953C00CBD52B /* Alamofire */,
 			);
 			productName = TodayweatherApp;
 			productReference = 8565BEA6298BF05500CBD52B /* TodayweatherApp.app */;
@@ -144,7 +152,6 @@
 			);
 			mainGroup = 8565BE9D298BF05500CBD52B;
 			packageReferences = (
-				8565BEBB298E953C00CBD52B /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 8565BEA7298BF05500CBD52B /* Products */;
 			projectDirPath = "";
@@ -175,6 +182,7 @@
 			files = (
 				8565BEBA298E947900CBD52B /* WeatherAPIManager.swift in Sources */,
 				8565BEAC298BF05500CBD52B /* ContentView.swift in Sources */,
+				8565BEC5298E986800CBD52B /* EndPoint.swift in Sources */,
 				8565BEC2298E95D400CBD52B /* APIKey.swift in Sources */,
 				8565BEAA298BF05500CBD52B /* TodayweatherAppApp.swift in Sources */,
 			);
@@ -309,7 +317,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodayweatherApp/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -343,7 +350,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodayweatherApp/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -387,25 +393,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		8565BEBB298E953C00CBD52B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		8565BEBC298E953C00CBD52B /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8565BEBB298E953C00CBD52B /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8565BE9E298BF05500CBD52B /* Project object */;
 }
