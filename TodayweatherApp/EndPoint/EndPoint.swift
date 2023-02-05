@@ -8,5 +8,5 @@
 import Foundation
 
 struct EndPoint {
-    static let veryShortLiveCheckingURL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/"
+    static let ultraSrtNcstURL = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/"
 }
