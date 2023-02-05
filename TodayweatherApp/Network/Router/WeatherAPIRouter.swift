@@ -42,7 +42,7 @@ enum WeatherAPIRouter: URLRequestConvertible {
                     "pageNo": 1,
                     "dataType": "JSON",
                     "base_date": dateArray[0],
-                    "base_time": "2000",
+                    "base_time": dateArray[1],
                     "nx": grid.nx,
                     "ny": grid.ny]
         }

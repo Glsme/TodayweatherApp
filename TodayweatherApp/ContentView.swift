@@ -7,17 +7,22 @@
 
 import SwiftUI
 import MapKit
+import CoreLocation
 
 struct ContentView: View {
     @StateObject private var network = WeatherAPIManager.shared
     private let geoConverter = GeoConverter()
+    
     var body: some View {
-        List {
-            ForEach(network.weatherData, id: \.self) { result in
-                Text("\(result.category): \(result.obsrValue)")
+        VStack {
+            Image(systemName: "person")
+            List {
+                ForEach(network.weatherData, id: \.self) { result in
+                    Text("\(result.category): \(result.obsrValue)")
+                }
             }
+            .listStyle(.grouped)
         }
-        .listStyle(.grouped)
         .onAppear {
             network.requestSomething(date: Date(), coordinate: CLLocationCoordinate2D(latitude: 37.621068, longitude: 127.041060))
         }
