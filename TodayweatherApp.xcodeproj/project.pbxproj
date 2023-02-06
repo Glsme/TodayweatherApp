@@ -21,6 +21,7 @@
 		8565BED8298FBE9F00CBD52B /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BED7298FBE9F00CBD52B /* GeoConverter.swift */; };
 		8565BEDA298FC48500CBD52B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BED9298FC48500CBD52B /* Grid.swift */; };
 		8565BEE0298FE72600CBD52B /* WeatherURLEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEDF298FE72600CBD52B /* WeatherURLEncoding.swift */; };
+		859EDF0429912576002FFE35 /* WeatherNetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859EDF0329912576002FFE35 /* WeatherNetworkType.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		8565BED7298FBE9F00CBD52B /* GeoConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoConverter.swift; sourceTree = "<group>"; };
 		8565BED9298FC48500CBD52B /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8565BEDF298FE72600CBD52B /* WeatherURLEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherURLEncoding.swift; sourceTree = "<group>"; };
+		859EDF0329912576002FFE35 /* WeatherNetworkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNetworkType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 			children = (
 				8565BED0298FA77400CBD52B /* UltraSrtNcst.swift */,
 				8565BED9298FC48500CBD52B /* Grid.swift */,
+				859EDF0329912576002FFE35 /* WeatherNetworkType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				8565BED1298FA77400CBD52B /* UltraSrtNcst.swift in Sources */,
 				8565BEAA298BF05500CBD52B /* TodayweatherAppApp.swift in Sources */,
 				8565BEDA298FC48500CBD52B /* Grid.swift in Sources */,
+				859EDF0429912576002FFE35 /* WeatherNetworkType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

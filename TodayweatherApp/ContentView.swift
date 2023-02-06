@@ -24,7 +24,7 @@ struct ContentView: View {
             .listStyle(.grouped)
         }
         .onAppear {
-            network.requestSomething(date: Date(), coordinate: CLLocationCoordinate2D(latitude: 37.621068, longitude: 127.041060))
+            network.requestUltraSrtNcst(date: Date(), coordinate: CLLocationCoordinate2D(latitude: 37.621068, longitude: 127.041060))
         }
     }
 }
