@@ -8,30 +8,30 @@
 import Foundation
 
 struct UltraSrtNcst: Codable {
-    var response: Response
+    var response: UltraSrtNcstResponse
 }
 
-struct Response: Codable {
-    var header: Header
-    var body: Body
+struct UltraSrtNcstResponse: Codable {
+    var header: UltraSrtNcstHeader
+    var body: UltraSrtNcstBody
 }
 
-struct Body: Codable {
+struct UltraSrtNcstBody: Codable {
     var dataType: String
-    var items: Items
+    var items: UltraSrtNcstItems
     var pageNo, numOfRows, totalCount: Int
 }
 
-struct Items: Codable {
-    var item: [Item]
+struct UltraSrtNcstItems: Codable {
+    var item: [UltraSrtNcstItem]
 }
 
-struct Item: Codable, Hashable {
+struct UltraSrtNcstItem: Codable, Hashable {
     var baseDate, baseTime, category: String
     var nx, ny: Double
     var obsrValue: String
 }
 
-struct Header: Codable {
+struct UltraSrtNcstHeader: Codable {
     var resultCode, resultMsg: String
 }

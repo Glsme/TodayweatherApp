@@ -17,14 +17,14 @@ struct ContentView: View {
         VStack {
             Image(systemName: "person")
             List {
-                ForEach(network.weatherData, id: \.self) { result in
-                    Text("\(result.category): \(result.obsrValue)")
+                ForEach(network.vilageFcstData, id: \.self) { result in
+                    Text("\(result.category): \(result.fcstValue)")
                 }
             }
             .listStyle(.grouped)
         }
         .onAppear {
-            network.requestUltraSrtNcst(date: Date(), coordinate: CLLocationCoordinate2D(latitude: 37.621068, longitude: 127.041060))
+            network.requestVilageFcst(date: Date(), coordinate: CLLocationCoordinate2D(latitude: 37.621068, longitude: 127.041060))
         }
     }
 }

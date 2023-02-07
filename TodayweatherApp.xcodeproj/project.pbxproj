@@ -22,6 +22,8 @@
 		8565BEDA298FC48500CBD52B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BED9298FC48500CBD52B /* Grid.swift */; };
 		8565BEE0298FE72600CBD52B /* WeatherURLEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEDF298FE72600CBD52B /* WeatherURLEncoding.swift */; };
 		859EDF0429912576002FFE35 /* WeatherNetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859EDF0329912576002FFE35 /* WeatherNetworkType.swift */; };
+		859EDF0629927990002FFE35 /* UltraSrtFcst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859EDF0529927990002FFE35 /* UltraSrtFcst.swift */; };
+		859EDF0829927C57002FFE35 /* VilageFcst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859EDF0729927C57002FFE35 /* VilageFcst.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		8565BED9298FC48500CBD52B /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		8565BEDF298FE72600CBD52B /* WeatherURLEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherURLEncoding.swift; sourceTree = "<group>"; };
 		859EDF0329912576002FFE35 /* WeatherNetworkType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNetworkType.swift; sourceTree = "<group>"; };
+		859EDF0529927990002FFE35 /* UltraSrtFcst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UltraSrtFcst.swift; sourceTree = "<group>"; };
+		859EDF0729927C57002FFE35 /* VilageFcst.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VilageFcst.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,8 @@
 				8565BED0298FA77400CBD52B /* UltraSrtNcst.swift */,
 				8565BED9298FC48500CBD52B /* Grid.swift */,
 				859EDF0329912576002FFE35 /* WeatherNetworkType.swift */,
+				859EDF0529927990002FFE35 /* UltraSrtFcst.swift */,
+				859EDF0729927C57002FFE35 /* VilageFcst.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -228,8 +234,10 @@
 			files = (
 				8565BEBA298E947900CBD52B /* WeatherAPIManager.swift in Sources */,
 				8565BEAC298BF05500CBD52B /* ContentView.swift in Sources */,
+				859EDF0629927990002FFE35 /* UltraSrtFcst.swift in Sources */,
 				8565BED5298FB65800CBD52B /* WeatherAPIRouter.swift in Sources */,
 				8565BEE0298FE72600CBD52B /* WeatherURLEncoding.swift in Sources */,
+				859EDF0829927C57002FFE35 /* VilageFcst.swift in Sources */,
 				8565BEC5298E986800CBD52B /* EndPoint.swift in Sources */,
 				8565BED8298FBE9F00CBD52B /* GeoConverter.swift in Sources */,
 				8565BEC2298E95D400CBD52B /* APIKey.swift in Sources */,

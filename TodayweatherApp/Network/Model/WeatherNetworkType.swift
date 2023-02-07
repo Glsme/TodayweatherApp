@@ -8,10 +8,12 @@
 import Foundation
 
 enum WeatherNetworkType {
-    case ultraSrtNcst
+    case getUltraSrtNcst    // 초단기 실황 조회
+    case getUltraSrtFcst    // 초단기 예보 조회
+    case getVilageFcst      // 단기 예보 조회
 }
 
-enum UltraSrtNcstCategory: String {
+enum Category: String {
     case T1H
     case RN1
     case UUU
