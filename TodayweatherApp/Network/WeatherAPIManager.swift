@@ -60,7 +60,8 @@ final class WeatherAPIManager: NSObject, ObservableObject {
     }
     
     func requestVilageFcst(date: Date, coordinate: CLLocationCoordinate2D) {
-        let router = WeatherAPIRouter.vilageFcst(date: date, grid: convertGrid(coordinate))
+        let convertedDate: Date = convertVilageFcstDate(date)
+        let router = WeatherAPIRouter.vilageFcst(date: convertedDate, grid: convertGrid(coordinate))
         
         AF.request(router).responseDecodable(of: VilageFcst.self) { [weak self] response in
             guard let self = self else { return }
@@ -74,6 +75,40 @@ final class WeatherAPIManager: NSObject, ObservableObject {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    // - Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
+    // - API 제공 시간(~이후) : 02:10, 05:10, 08:10, 11:10, 14:10, 17:10, 20:10, 23:10
+    private func convertVilageFcstDate(_ date: Date) -> Date {
+        var array = dateFormatter.string(from: date).split(separator: " ")
+        guard var hour = Int(array[1]) else { return Date() }
+        
+        switch hour {
+        case 0...210:
+            guard let date = Int(array[0]) else { return Date() }
+            array[0] = "\(date - 1)"
+            hour = 2300
+        case 211...510:
+            hour = 210
+        case 511...810:
+            hour = 510
+        case 811...1110:
+            hour = 810
+        case 1111...1410:
+            hour = 1110
+        case 1411...1710:
+            hour = 1410
+        case 1711...2010:
+            hour = 1710
+        case 2011...2310:
+            hour = 2010
+        case 2311...2399:
+            hour = 2310
+        default:
+            break
+        }
+        
+        return dateFormatter.date(from: array[0] + " \(hour)") ?? Date()
     }
     
     private func convertGrid(_ coordinate: CLLocationCoordinate2D) -> Grid {

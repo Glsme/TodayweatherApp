@@ -18,7 +18,7 @@ struct ContentView: View {
             Image(systemName: "person")
             List {
                 ForEach(network.vilageFcstData, id: \.self) { result in
-                    Text("\(result.category): \(result.fcstValue)")
+                    Text("\(result.fcstDate) - \(result.fcstTime)  \(result.category) || \(result.fcstValue)")
                 }
             }
             .listStyle(.grouped)

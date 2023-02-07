@@ -54,7 +54,7 @@ enum WeatherAPIRouter: URLRequestConvertible {
         case .ultraSrtFcst(date: let date, grid: let grid):
             let dateArray = dateFormatter.string(from: date).split(separator: " ")
             return ["serviceKey": APIKey.encodingKey,
-                    "numOfRows": 100,
+                    "numOfRows": 500,
                     "pageNo": 1,
                     "dataType": "JSON",
                     "base_date": dateArray[0],
@@ -64,7 +64,7 @@ enum WeatherAPIRouter: URLRequestConvertible {
         case .vilageFcst(date: let date, grid: let grid):
             let dateArray = dateFormatter.string(from: date).split(separator: " ")
             return ["serviceKey": APIKey.encodingKey,
-                    "numOfRows": 100,
+                    "numOfRows": 1500,
                     "pageNo": 1,
                     "dataType": "JSON",
                     "base_date": dateArray[0],
