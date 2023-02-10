@@ -15,17 +15,22 @@ struct HourWeatherView: View {
     @StateObject private var viewModel = HourWeatherViewModel()
     
     var body: some View {
-        ScrollView(.horizontal) {
-            HStack {
-                ForEach(viewModel.hourWeather, id: \.self) { datas in
-                    DayWeatherItem(datas: datas)
+        ZStack {
+            ScrollView(.horizontal) {
+                HStack {
+                    ForEach(viewModel.hourWeather, id: \.self) { datas in
+                        DayWeatherItem(datas: datas)
+                    }
                 }
+                .padding()
             }
-            .padding()
+            .onAppear {
+                viewModel.requestVilageFcst(coordinate: CLLocationCoordinate2D(latitude: 37.621068, longitude: 127.041060))
+            }
         }
-        .onAppear {
-            viewModel.requestVilageFcst(coordinate: CLLocationCoordinate2D(latitude: 37.621068, longitude: 127.041060))
-        }
+        .background(Color.blue)
+        .cornerRadius(15)
+        .padding()
     }
 }
 
