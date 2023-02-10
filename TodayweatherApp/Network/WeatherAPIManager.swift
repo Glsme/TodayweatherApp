@@ -13,13 +13,11 @@ import Alamofire
 final class WeatherAPIManager: NSObject, ObservableObject {
     static let shared = WeatherAPIManager()
     
-    @Published var ultraSrtNcstData: [UltraSrtNcstItem] = []
-    @Published var ultraSrtFcstData: [UltraSrtFcstItem] = []
-    @Published var vilageFcstData: [VilageFcstItem] = []
-    
     private let dateFormatter: DateFormatter = {
         let f = DateFormatter()
         f.dateFormat = "yyyyMMdd HHmm"
+        f.locale = Locale(identifier: Locale.current.identifier)
+        f.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
         return f
     }()
     
@@ -27,49 +25,43 @@ final class WeatherAPIManager: NSObject, ObservableObject {
     
     private override init() { }
     
-    func requestUltraSrtNcst(date: Date, coordinate: CLLocationCoordinate2D) {
+    func requestUltraSrtNcst(date: Date, coordinate: CLLocationCoordinate2D, completion: @escaping ([UltraSrtNcstItem]) -> Void) {
         let router = WeatherAPIRouter.ultraSrtNcst(date: date, grid: convertGrid(coordinate))
         
-        AF.request(router).responseDecodable(of: UltraSrtNcst.self) { [weak self] response in
-            guard let self = self else { return }
+        AF.request(router).responseDecodable(of: UltraSrtNcst.self) {response in
             switch response.result {
             case .success(let data):
                 let items = data.response.body.items.item
-                self.ultraSrtNcstData.removeAll()
-                self.ultraSrtNcstData.append(contentsOf: items)
+                completion(items)
             case .failure(let error):
                 dump(error)
             }
         }
     }
     
-    func requestUltraSrtFcst(date: Date, coordinate: CLLocationCoordinate2D) {
+    func requestUltraSrtFcst(date: Date, coordinate: CLLocationCoordinate2D, completion: @escaping ([UltraSrtFcstItem]) -> Void) {
         let router = WeatherAPIRouter.ultraSrtFcst(date: date, grid: convertGrid(coordinate))
         
-        AF.request(router).responseDecodable(of: UltraSrtFcst.self) { [weak self] response in
-            guard let self = self else { return }
+        AF.request(router).responseDecodable(of: UltraSrtFcst.self) {response in
             switch response.result {
             case .success(let data):
                 let items = data.response.body.items.item
-                self.ultraSrtFcstData.removeAll()
-                self.ultraSrtFcstData.append(contentsOf: items)
+                completion(items)
             case .failure(let error):
                 dump(error)
             }
         }
     }
     
-    func requestVilageFcst(date: Date, coordinate: CLLocationCoordinate2D) {
+    func requestVilageFcst(date: Date, coordinate: CLLocationCoordinate2D, completion: @escaping ([VilageFcstItem]) -> Void) {
         let convertedDate: Date = convertVilageFcstDate(date)
         let router = WeatherAPIRouter.vilageFcst(date: convertedDate, grid: convertGrid(coordinate))
         
-        AF.request(router).responseDecodable(of: VilageFcst.self) { [weak self] response in
-            guard let self = self else { return }
+        AF.request(router).responseDecodable(of: VilageFcst.self) {response in
             switch response.result {
             case .success(let data):
                 let items = data.response.body.items.item
-                self.vilageFcstData.removeAll()
-                self.vilageFcstData.append(contentsOf: items)
+                completion(items)
             case .failure(let error):
                 dump(error)
                 print(error.localizedDescription)
@@ -108,7 +100,8 @@ final class WeatherAPIManager: NSObject, ObservableObject {
             break
         }
         
-        return dateFormatter.date(from: array[0] + " \(hour)") ?? Date()
+        let targetDate = dateFormatter.date(from: array[0] + " \(hour)") ?? Date()
+        return targetDate
     }
     
     private func convertGrid(_ coordinate: CLLocationCoordinate2D) -> Grid {
