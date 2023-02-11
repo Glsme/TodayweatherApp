@@ -7,9 +7,18 @@
 
 import SwiftUI
 
-struct BodyTextModifier: ViewModifier {
+struct TempTextModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom(Fonts.bold.rawValue, size: 16))
+    }
+}
+
+struct TimeTextModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.custom(Fonts.bold.rawValue, size: 14))
+            .lineLimit(50)
+            .fixedSize(horizontal: true, vertical: true)
     }
 }

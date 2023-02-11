@@ -13,7 +13,7 @@ struct DayWeatherItem: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(datas.isEmpty ? "" : datas[0].date)
-                .modifier(BodyTextModifier())
+                .modifier(TempTextModifier())
             Divider()
                 .background(Color(r: 56, g: 99, b: 198))
             HStack {

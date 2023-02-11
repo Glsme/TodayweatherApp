@@ -13,12 +13,12 @@ struct HourWeatherItem: View {
     var body: some View {
         VStack {
             Text(weatherData.time)
-                .modifier(BodyTextModifier())
+                .modifier(TimeTextModifier())
             Spacer()
             Image(systemName: weatherData.img)
             Spacer()
             Text(weatherData.temp)
-                .modifier(BodyTextModifier())
+                .modifier(TempTextModifier())
         }
         .padding()
     }

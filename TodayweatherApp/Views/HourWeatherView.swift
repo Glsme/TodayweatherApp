@@ -24,7 +24,7 @@ struct HourWeatherView: View {
                 viewModel.checkUserDeviceLocationAuth()
             }
         }
-        .background(Color.white)
+        .background(Color.white.opacity(0.5))
         .cornerRadius(15)
         .padding()
     }
