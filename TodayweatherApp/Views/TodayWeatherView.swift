@@ -12,8 +12,11 @@ struct TodayWeatherView: View {
     @Binding var subLocality: String
     
     var body: some View {
-        Text(administrativeArea)
-        Text(subLocality)
+        VStack {
+            Text("\(administrativeArea) \(subLocality)")
+                .modifier(TimeTextModifier())
+        }
+        .padding()
     }
 }
 
