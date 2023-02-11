@@ -10,8 +10,6 @@ import MapKit
 import CoreLocation
 
 struct HourWeatherView: View {
-    @StateObject private var network = WeatherAPIManager.shared
-    private let geoConverter = GeoConverter()
     @StateObject private var viewModel = HourWeatherViewModel()
     
     var body: some View {
@@ -28,7 +26,7 @@ struct HourWeatherView: View {
                 viewModel.requestVilageFcst(coordinate: CLLocationCoordinate2D(latitude: 37.621068, longitude: 127.041060))
             }
         }
-        .background(Color.blue)
+        .background(Color.white)
         .cornerRadius(15)
         .padding()
     }

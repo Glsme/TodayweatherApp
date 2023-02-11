@@ -36,6 +36,7 @@
 		85AEBA702996474B0057BE2C /* SUIT-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85AEBA6F2996474B0057BE2C /* SUIT-SemiBold.ttf */; };
 		85AEBA722996477C0057BE2C /* SUIT-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85AEBA712996477C0057BE2C /* SUIT-Light.ttf */; };
 		85AEBA74299647E30057BE2C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AEBA73299647E30057BE2C /* Fonts.swift */; };
+		85AEBA772997C9100057BE2C /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AEBA762997C9100057BE2C /* Color+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,7 @@
 		85AEBA6F2996474B0057BE2C /* SUIT-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-SemiBold.ttf"; sourceTree = "<group>"; };
 		85AEBA712996477C0057BE2C /* SUIT-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Light.ttf"; sourceTree = "<group>"; };
 		85AEBA73299647E30057BE2C /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		85AEBA762997C9100057BE2C /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +228,7 @@
 		85AEBA67299645D90057BE2C /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				85AEBA752997C9040057BE2C /* Extension */,
 				85AEBA68299645E00057BE2C /* Modifier */,
 			);
 			path = Common;
@@ -237,6 +240,14 @@
 				85AEBA692996460D0057BE2C /* TextModifier.swift */,
 			);
 			path = Modifier;
+			sourceTree = "<group>";
+		};
+		85AEBA752997C9040057BE2C /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				85AEBA762997C9100057BE2C /* Color+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,6 +340,7 @@
 				8565BEE0298FE72600CBD52B /* WeatherURLEncoding.swift in Sources */,
 				85AEBA74299647E30057BE2C /* Fonts.swift in Sources */,
 				85AEBA5D2995E7380057BE2C /* HourWeather.swift in Sources */,
+				85AEBA772997C9100057BE2C /* Color+Extension.swift in Sources */,
 				859EDF0829927C57002FFE35 /* VilageFcst.swift in Sources */,
 				8565BEC5298E986800CBD52B /* EndPoint.swift in Sources */,
 				8565BED8298FBE9F00CBD52B /* GeoConverter.swift in Sources */,
