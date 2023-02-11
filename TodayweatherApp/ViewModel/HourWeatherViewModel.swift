@@ -38,11 +38,18 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
     @Published var administrativeArea: String = ""
     @Published var subLocality: String = ""
     
-    func requestVilageFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
-        network.requestVilageFcst(date: Date(), coordinate: coordinate) { [weak self] result in
+    private func requestVilageFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
+        network.requestVilageFcst(date: date, coordinate: coordinate) { [weak self] result in
             guard let self = self else { return }
             let data = self.convertVilageFcstData(result)
             self.hourWeather = self.groupHourWeatherByDate(data)
+        }
+    }
+    
+    private func requestUltraSrtNcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
+        network.requestUltraSrtNcst(date: date, coordinate: coordinate) { [weak self] result in
+            guard let self = self else { return }
+            print("!!!", result)
         }
     }
     
@@ -97,35 +104,9 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
             isNight = Int($0[0].fcstTime)! > 1800 || Int($0[0].fcstTime)! < 600
             
             if $0[2].category == "PTY", $0[2].fcstValue == "0" {
-                switch $0[1].fcstValue {
-                case "1":
-                    image = isNight ? "moon.stars.fill" : "sun.max.fill"
-                case "3":
-                    image = isNight ? "cloud.moon.fill": "cloud.sun.fill"
-                case "4":
-                    image = "cloud.fill"
-                default:
-                    break
-                }
+                image = changeWeatherNoRainSnow($0[1].fcstValue, isNight: isNight)
             } else {
-                switch $0[2].fcstValue {
-                case "1":
-                    image = "cloud.rain.fill"
-                case "2":
-                    image = "cloud.sleet.fill"
-                case "3":
-                    image = "cloud.snow.fill"
-                case "4":
-                    image = "cloud.rain.fill"
-                case "5":
-                    image = "cloud.rain.fill"
-                case "6":
-                    image = "cloud.rain.fill"
-                case "7":
-                    image = "wind.snow"
-                default:
-                    break
-                }
+                image = changeWeatherRainSnow($0[2].fcstValue)
             }
             
             let data = HourWeather(date: convertDateKo($0[0].fcstDate),
@@ -137,6 +118,40 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
         }
         
         return hourWeather
+    }
+    
+    private func changeWeatherNoRainSnow(_ value: String, isNight: Bool) -> String {
+        switch value {
+        case "1":
+            return isNight ? "moon.stars.fill" : "sun.max.fill"
+        case "3":
+            return isNight ? "cloud.moon.fill": "cloud.sun.fill"
+        case "4":
+            return "cloud.fill"
+        default:
+            return ""
+        }
+    }
+    
+    private func changeWeatherRainSnow(_ value: String) -> String {
+        switch value {
+        case "1":
+            return "cloud.rain.fill"
+        case "2":
+            return "cloud.sleet.fill"
+        case "3":
+            return "cloud.snow.fill"
+        case "4":
+            return "cloud.rain.fill"
+        case "5":
+            return "cloud.rain.fill"
+        case "6":
+            return "cloud.rain.fill"
+        case "7":
+            return "wind.snow"
+        default:
+            return ""
+        }
     }
     
     // [1, 1, 2, 2, 3, 3, ...] -> [[1,1], [2,2], [3,3] ...]
@@ -180,19 +195,9 @@ extension HourWeatherViewModel: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let coordinate = locations.last?.coordinate {
-            print(coordinate)
             requestVilageFcst(coordinate: coordinate)
-            
-            let findLocation: CLLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-            let geoCoder: CLGeocoder = CLGeocoder()
-            let local: Locale = Locale(identifier: "Ko-kr") // Korea
-            geoCoder.reverseGeocodeLocation(findLocation, preferredLocale: local) { [weak self] place, _ in
-                guard let self = self else { return }
-                if let address: [CLPlacemark] = place {
-                    self.administrativeArea = address.last?.administrativeArea ?? "지역 오류"
-                    self.subLocality = address.last?.subLocality ?? "지역 오류"
-                }
-            }
+            requestUltraSrtNcst(coordinate: coordinate)
+            checkUserCurrentLocation(coordinate)
         }
         
         locationManager.stopUpdatingLocation()
@@ -200,5 +205,19 @@ extension HourWeatherViewModel: CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         checkUserDeviceLocationAuth()
+    }
+    
+    // 사용자 위치 변환 및 저장
+    func checkUserCurrentLocation(_ coordinate: CLLocationCoordinate2D) {
+        let findLocation: CLLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        let geoCoder: CLGeocoder = CLGeocoder()
+        let local: Locale = Locale(identifier: "Ko-kr") // Korea
+        geoCoder.reverseGeocodeLocation(findLocation, preferredLocale: local) { [weak self] place, _ in
+            guard let self = self else { return }
+            if let address: [CLPlacemark] = place {
+                self.administrativeArea = address.last?.administrativeArea ?? "지역 오류"
+                self.subLocality = address.last?.subLocality ?? "지역 오류"
+            }
+        }
     }
 }

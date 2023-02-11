@@ -109,37 +109,4 @@ final class WeatherAPIManager: NSObject, ObservableObject {
         guard let convertedPoint = geoConverter.wgs84ToGrid(point) else { return Grid(nx: 0, ny: 0) }
         return Grid(nx: convertedPoint.x, ny: convertedPoint.y)
     }
-    
-//    private func convertCategory(_ item: Item) -> Item {
-//        let categoryType = Category(rawValue: item.category)
-//        var category: String = ""
-//
-//        switch categoryType {
-//        case .T1H:
-//            category = "기온"
-//        case .RN1:
-//            category = "1시간 강수량"
-//        case .UUU:
-//            category = "동서바람성분"
-//        case .VVV:
-//            category = "남북바람성분"
-//        case .REH:
-//            category = "습도"
-//        case .PTY:
-//            category = "강수 형태"
-//        case .VEC:
-//            category = "풍향"
-//        case .WSD:
-//            category = "풍속"
-//        case .none:
-//            break
-//        }
-//
-//        return Item(baseDate: item.baseDate,
-//             baseTime: item.baseTime,
-//             category: category,
-//             nx: item.nx,
-//             ny: item.ny,
-//             obsrValue: item.obsrValue)
-//    }
 }
