@@ -8,33 +8,29 @@
 import SwiftUI
 
 struct HourWeatherView: View {
-    @StateObject private var viewModel = HourWeatherViewModel()
+//    @StateObject private var viewModel = HourWeatherViewModel()
+    @Binding var hourWeather: [[HourWeather]]
     
     var body: some View {
         ZStack {
             ScrollView(.horizontal) {
                 HStack {
-                    ForEach(viewModel.hourWeather, id: \.self) { datas in
+                    ForEach(hourWeather, id: \.self) { datas in
                         DayWeatherItem(datas: datas)
                     }
                 }
                 .padding()
             }
-            .onAppear {
-                viewModel.checkUserDeviceLocationAuth()
-            }
         }
-        .background(Color.white.opacity(0.5))
+        .background(Color.white.opacity(0.7))
         .cornerRadius(15)
         .padding()
     }
-    
-    
 }
 
-struct HourWeatherView_Previews: PreviewProvider {
-    static var previews: some View {
-        HourWeatherView()
-        //            .environmentObject(HourWeatherViewModel())
-    }
-}
+//struct HourWeatherView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HourWeatherView()
+//        //            .environmentObject(HourWeatherViewModel())
+//    }
+//}

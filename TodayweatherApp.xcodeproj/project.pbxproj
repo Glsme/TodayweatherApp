@@ -37,6 +37,7 @@
 		85AEBA722996477C0057BE2C /* SUIT-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85AEBA712996477C0057BE2C /* SUIT-Light.ttf */; };
 		85AEBA74299647E30057BE2C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AEBA73299647E30057BE2C /* Fonts.swift */; };
 		85AEBA772997C9100057BE2C /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AEBA762997C9100057BE2C /* Color+Extension.swift */; };
+		85AEBA812997DDD40057BE2C /* TodayWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AEBA802997DDD40057BE2C /* TodayWeatherView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,7 @@
 		85AEBA712996477C0057BE2C /* SUIT-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SUIT-Light.ttf"; sourceTree = "<group>"; };
 		85AEBA73299647E30057BE2C /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		85AEBA762997C9100057BE2C /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		85AEBA802997DDD40057BE2C /* TodayWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWeatherView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,9 +192,10 @@
 				85AEBA67299645D90057BE2C /* Common */,
 				8565BEAB298BF05500CBD52B /* ContentView.swift */,
 				85AEBA562995DB5B0057BE2C /* WeatherHome.swift */,
+				85AEBA802997DDD40057BE2C /* TodayWeatherView.swift */,
 				85AEBA542995DB3C0057BE2C /* HourWeatherView.swift */,
-				85AEBA6029961AFA0057BE2C /* HourWeatherItem.swift */,
 				85AEBA6229963B830057BE2C /* DayWeatherItem.swift */,
+				85AEBA6029961AFA0057BE2C /* HourWeatherItem.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				8565BED8298FBE9F00CBD52B /* GeoConverter.swift in Sources */,
 				8565BEC2298E95D400CBD52B /* APIKey.swift in Sources */,
 				8565BED1298FA77400CBD52B /* UltraSrtNcst.swift in Sources */,
+				85AEBA812997DDD40057BE2C /* TodayWeatherView.swift in Sources */,
 				85AEBA6329963B830057BE2C /* DayWeatherItem.swift in Sources */,
 				8565BEAA298BF05500CBD52B /* TodayweatherAppApp.swift in Sources */,
 				85AEBA6129961AFA0057BE2C /* HourWeatherItem.swift in Sources */,

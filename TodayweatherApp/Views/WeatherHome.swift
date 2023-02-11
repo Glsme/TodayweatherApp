@@ -10,12 +10,16 @@ import MapKit
 import CoreLocation
 
 struct WeatherHome: View {
-    @StateObject private var network = WeatherAPIManager.shared
-    private let geoConverter = GeoConverter()
+    @StateObject private var viewModel = HourWeatherViewModel()
     
     var body: some View {
         ScrollView {
-            HourWeatherView()
+            TodayWeatherView(administrativeArea: $viewModel.administrativeArea,
+                             subLocality: $viewModel.subLocality)
+            HourWeatherView(hourWeather: $viewModel.hourWeather)
+        }
+        .onAppear {
+            viewModel.checkUserDeviceLocationAuth()
         }
     }
 }

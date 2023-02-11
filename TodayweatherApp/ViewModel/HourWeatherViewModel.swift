@@ -35,6 +35,8 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
     }()
     
     @Published var hourWeather: [[HourWeather]] = [[]]
+    @Published var administrativeArea: String = ""
+    @Published var subLocality: String = ""
     
     func requestVilageFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestVilageFcst(date: Date(), coordinate: coordinate) { [weak self] result in
@@ -180,9 +182,26 @@ extension HourWeatherViewModel: CLLocationManagerDelegate {
         if let coordinate = locations.last?.coordinate {
             print(coordinate)
             requestVilageFcst(coordinate: coordinate)
+            
+            
+    //        let location: CLLocation = locations[locations.count - 1]
+    //        let longitude: CLLocationDegrees = location.coordinate.longitude
+    //        let latitude: CLLocationDegrees = location.coordinate.latitude
+            
+            let findLocation: CLLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+            let geoCoder: CLGeocoder = CLGeocoder()
+            let local: Locale = Locale(identifier: "Ko-kr") // Korea
+            geoCoder.reverseGeocodeLocation(findLocation, preferredLocale: local) { [weak self] place, _ in
+                guard let self = self else { return }
+                if let address: [CLPlacemark] = place {
+                    self.administrativeArea = address.last?.administrativeArea ?? "지역 오류"
+                    self.subLocality = address.last?.subLocality ?? "지역 오류"
+                }
+            }
         }
         
         locationManager.stopUpdatingLocation()
+        
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
