@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct HourWeatherView: View {
-//    @StateObject private var viewModel = HourWeatherViewModel()
     @Binding var hourWeather: [[HourWeather]]
     
     var body: some View {

@@ -183,11 +183,6 @@ extension HourWeatherViewModel: CLLocationManagerDelegate {
             print(coordinate)
             requestVilageFcst(coordinate: coordinate)
             
-            
-    //        let location: CLLocation = locations[locations.count - 1]
-    //        let longitude: CLLocationDegrees = location.coordinate.longitude
-    //        let latitude: CLLocationDegrees = location.coordinate.latitude
-            
             let findLocation: CLLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
             let geoCoder: CLGeocoder = CLGeocoder()
             let local: Locale = Locale(identifier: "Ko-kr") // Korea
@@ -201,7 +196,6 @@ extension HourWeatherViewModel: CLLocationManagerDelegate {
         }
         
         locationManager.stopUpdatingLocation()
-        
     }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
