@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import MapKit
-import CoreLocation
 
 struct HourWeatherView: View {
     @StateObject private var viewModel = HourWeatherViewModel()
@@ -23,13 +21,15 @@ struct HourWeatherView: View {
                 .padding()
             }
             .onAppear {
-                viewModel.requestVilageFcst(coordinate: CLLocationCoordinate2D(latitude: 37.621068, longitude: 127.041060))
+                viewModel.checkUserDeviceLocationAuth()
             }
         }
         .background(Color.white)
         .cornerRadius(15)
         .padding()
     }
+    
+    
 }
 
 struct HourWeatherView_Previews: PreviewProvider {

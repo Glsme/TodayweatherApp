@@ -9,6 +9,14 @@ import Foundation
 import CoreLocation
 
 final class HourWeatherViewModel: NSObject, ObservableObject {
+    let locationManager = CLLocationManager()
+    
+    override init() {
+        super.init()
+        
+        locationManager.delegate = self
+    }
+    
     private let network = WeatherAPIManager.shared
     private let timeFormatter: DateFormatter = {
         let f = DateFormatter()
@@ -143,5 +151,41 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
         }
         
         return filterData
+    }
+}
+
+//위치 권한 관련
+extension HourWeatherViewModel: CLLocationManagerDelegate {
+    func checkUserDeviceLocationAuth() {
+        checkUserCurrentLocationAuth(locationManager.authorizationStatus)
+    }
+    
+    private func checkUserCurrentLocationAuth(_ authStatus: CLAuthorizationStatus) {
+        switch authStatus {
+        case .notDetermined:
+            print("not Determined")
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            print("restricted or denied, 아이폰 설정 유도")
+        case .authorizedWhenInUse:
+            print("when in use")
+            locationManager.startUpdatingLocation()
+        default:
+            print("Default")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let coordinate = locations.last?.coordinate {
+            print(coordinate)
+            requestVilageFcst(coordinate: coordinate)
+        }
+        
+        locationManager.stopUpdatingLocation()
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkUserDeviceLocationAuth()
     }
 }
