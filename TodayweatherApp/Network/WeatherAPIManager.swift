@@ -26,7 +26,8 @@ final class WeatherAPIManager: NSObject, ObservableObject {
     private override init() { }
     
     func requestUltraSrtNcst(date: Date, coordinate: CLLocationCoordinate2D, completion: @escaping ([UltraSrtNcstItem]) -> Void) {
-        let router = WeatherAPIRouter.ultraSrtNcst(date: date, grid: convertGrid(coordinate))
+        let convertedDate: Date = convertUltraSrtNcst(date)
+        let router = WeatherAPIRouter.ultraSrtNcst(date: convertedDate, grid: convertGrid(coordinate))
         
         AF.request(router).responseDecodable(of: UltraSrtNcst.self) {response in
             switch response.result {
@@ -69,6 +70,29 @@ final class WeatherAPIManager: NSObject, ObservableObject {
         }
     }
     
+    // - Base_time: 매 시간 정각
+    // - API 제공 시간(~이후): 매 시간 40분 이후
+    private func convertUltraSrtNcst(_ date: Date) -> Date {
+        var array = dateFormatter.string(from: date).split(separator: " ")
+        guard var hour = Int(array[1]) else { return Date() }
+        
+        switch hour {
+        case 0...40:
+            guard let date = Int(array[0]) else { return Date() }
+            array[0] = "\(date - 1)"
+            hour = 41
+        default:
+            let hourString = "\(hour)"
+            let hourArray = Array(hourString).map { String($0) }
+            let changedHour = Int(hourArray[0] + hourArray[1])!
+            hour = (changedHour - 2) * 100 + 40
+        }
+        
+        print("초단기 실황 시간 : \(hour)")
+        let targetDate = dateFormatter.date(from: array[0] + " \(hour)") ?? Date()
+        return targetDate
+    }
+    
     // - Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
     // - API 제공 시간(~이후) : 02:10, 05:10, 08:10, 11:10, 14:10, 17:10, 20:10, 23:10
     private func convertVilageFcstDate(_ date: Date) -> Date {
@@ -100,6 +124,7 @@ final class WeatherAPIManager: NSObject, ObservableObject {
             break
         }
         
+        print("단기 예보 시간: \(hour)")
         let targetDate = dateFormatter.date(from: array[0] + " \(hour)") ?? Date()
         return targetDate
     }

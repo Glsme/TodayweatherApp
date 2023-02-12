@@ -15,7 +15,8 @@ struct WeatherHome: View {
     var body: some View {
         ScrollView {
             TodayWeatherView(administrativeArea: $viewModel.administrativeArea,
-                             subLocality: $viewModel.subLocality)
+                             subLocality: $viewModel.subLocality,
+                             currentTemp: $viewModel.currentTemp)
             HourWeatherView(hourWeather: $viewModel.hourWeather)
         }
         .onAppear {

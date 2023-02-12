@@ -34,14 +34,17 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
         return f
     }()
     
+    // View 관련 프로퍼티
     @Published var hourWeather: [[HourWeather]] = [[]]
     @Published var administrativeArea: String = ""
     @Published var subLocality: String = ""
+    @Published var currentTemp: String = ""
     
     private func requestVilageFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestVilageFcst(date: date, coordinate: coordinate) { [weak self] result in
             guard let self = self else { return }
             let data = self.convertVilageFcstData(result)
+            self.hourWeather.removeAll()
             self.hourWeather = self.groupHourWeatherByDate(data)
         }
     }
@@ -49,7 +52,11 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
     private func requestUltraSrtNcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestUltraSrtNcst(date: date, coordinate: coordinate) { [weak self] result in
             guard let self = self else { return }
-            print("!!!", result)
+            result.forEach {
+                if $0.category == "T1H" {
+                    self.currentTemp = $0.obsrValue + " ℃"
+                }
+            }
         }
     }
     
@@ -108,7 +115,7 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
             } else {
                 image = changeWeatherRainSnow($0[2].fcstValue)
             }
-            
+
             let data = HourWeather(date: convertDateKo($0[0].fcstDate),
                                    time: hourWeather.isEmpty ? "현재" : convertHourKo($0[0].fcstTime),
                                    img: image,
