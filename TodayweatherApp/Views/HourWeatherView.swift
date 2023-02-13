@@ -29,7 +29,6 @@ struct HourWeatherView: View {
 
 //struct HourWeatherView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        HourWeatherView()
-//        //            .environmentObject(HourWeatherViewModel())
+//        HourWeatherView(hourWeather: )
 //    }
 //}

@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-final class HourWeatherViewModel: NSObject, ObservableObject {
+final class WeatherViewModel: NSObject, ObservableObject {
     let locationManager = CLLocationManager()
     
     override init() {
@@ -39,6 +39,7 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
     @Published var administrativeArea: String = ""
     @Published var subLocality: String = ""
     @Published var currentTemp: String = ""
+    @Published var currentWeatherImage: String = ""
     
     private func requestVilageFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestVilageFcst(date: date, coordinate: coordinate) { [weak self] result in
@@ -48,6 +49,12 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
             self.hourWeather = self.groupHourWeatherByDate(data)
         }
     }
+    
+//    private func requestUltraSrtFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
+//        network.requestUltraSrtFcst(date: date, coordinate: coordinate) { result in
+//            dump(result)
+//        }
+//    }
     
     private func requestUltraSrtNcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestUltraSrtNcst(date: date, coordinate: coordinate) { [weak self] result in
@@ -117,7 +124,7 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
             }
 
             let data = HourWeather(date: convertDateKo($0[0].fcstDate),
-                                   time: hourWeather.isEmpty ? "현재" : convertHourKo($0[0].fcstTime),
+                                   time: convertHourKo($0[0].fcstTime), // hourWeather.isEmpty ? "현재" : convertHourKo($0[0].fcstTime),
                                    img: image,
                                    temp: "\($0[0].fcstValue) º",
                                    UUID: UUID().uuidString)
@@ -163,7 +170,7 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
     
     // [1, 1, 2, 2, 3, 3, ...] -> [[1,1], [2,2], [3,3] ...]
     private func filterVilageFcstData(_ data: [VilageFcstItem]) -> [[VilageFcstItem]] {
-        let data = data.filter { $0.category == "TMP" || $0.category == "SKY" || $0.category == "PTY" }
+        let data = data.filter { ($0.category == "TMP" || $0.category == "SKY" || $0.category == "PTY") && isFutureData($0.fcstDate, $0.fcstTime) }
         var filterData: [[VilageFcstItem]] = []
         
         var count = 0
@@ -176,10 +183,32 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
         
         return filterData
     }
+    
+    private func isFutureData(_ fcstDate: String, _ fcstTime: String) -> Bool {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMdd HHmm"
+        dateFormatter.locale = Locale(identifier: Locale.current.identifier)
+        dateFormatter.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
+        
+        let date = dateFormatter.string(from: Date())
+        let dateArray = date.split(separator: " ").map { String($0) }
+        
+        // 날짜가 현재 날짜보다 크면 true, 아닐 경우 다음 flow 진행
+        if Int(dateArray[0])! < Int(fcstDate)! {
+            return true
+        }
+        
+        // 시간이 현재 시간보다 크면 true
+        if Int(dateArray[1])! < Int(fcstTime)! {
+            return true
+        }
+        
+        return false
+    }
 }
 
 //위치 권한 관련
-extension HourWeatherViewModel: CLLocationManagerDelegate {
+extension WeatherViewModel: CLLocationManagerDelegate {
     func checkUserDeviceLocationAuth() {
         checkUserCurrentLocationAuth(locationManager.authorizationStatus)
     }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TodayWeatherView: View {
+struct CurrentWeatherView: View {
     @Binding var administrativeArea: String
     @Binding var subLocality: String
     @Binding var currentTemp: String
@@ -15,9 +15,10 @@ struct TodayWeatherView: View {
     var body: some View {
         VStack {
             Text("\(administrativeArea) \(subLocality)")
-                .modifier(TimeTextModifier())
+                .modifier(LocationTextModifier())
+            Spacer()
             Text(currentTemp)
-                .modifier(TimeTextModifier())
+                .modifier(CurrentTempTextModifer())
         }
         .padding()
     }

@@ -10,11 +10,11 @@ import MapKit
 import CoreLocation
 
 struct WeatherHome: View {
-    @StateObject private var viewModel = HourWeatherViewModel()
+    @StateObject private var viewModel = WeatherViewModel()
     
     var body: some View {
         ScrollView {
-            TodayWeatherView(administrativeArea: $viewModel.administrativeArea,
+            CurrentWeatherView(administrativeArea: $viewModel.administrativeArea,
                              subLocality: $viewModel.subLocality,
                              currentTemp: $viewModel.currentTemp)
             HourWeatherView(hourWeather: $viewModel.hourWeather)
@@ -28,6 +28,6 @@ struct WeatherHome: View {
 struct WeatherHome_Previews: PreviewProvider {
     static var previews: some View {
         WeatherHome()
-//            .environmentObject(HourWeatherViewModel())
+            .environmentObject(WeatherViewModel())
     }
 }
