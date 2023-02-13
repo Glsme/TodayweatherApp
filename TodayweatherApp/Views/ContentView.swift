@@ -14,7 +14,7 @@ struct ContentView: View {
                 .ignoresSafeArea()
             WeatherHome()
         }
-        .foregroundColor(Color(r: 56, g: 99, b: 198))
+        .foregroundColor(.blue)
     }
 }
 

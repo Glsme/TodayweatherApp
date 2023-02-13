@@ -20,7 +20,7 @@ struct HourWeatherItem: View {
             Text(weatherData.temp)
                 .modifier(TempTextModifier())
         }
-        .padding()
+        .padding([.leading, .trailing], 4)
     }
 }
 

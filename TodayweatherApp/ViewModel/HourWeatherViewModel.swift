@@ -54,7 +54,7 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
             guard let self = self else { return }
             result.forEach {
                 if $0.category == "T1H" {
-                    self.currentTemp = $0.obsrValue + " ℃"
+                    self.currentTemp = $0.obsrValue + " º"
                 }
             }
         }
@@ -119,7 +119,7 @@ final class HourWeatherViewModel: NSObject, ObservableObject {
             let data = HourWeather(date: convertDateKo($0[0].fcstDate),
                                    time: hourWeather.isEmpty ? "현재" : convertHourKo($0[0].fcstTime),
                                    img: image,
-                                   temp: "\($0[0].fcstValue)℃",
+                                   temp: "\($0[0].fcstValue) º",
                                    UUID: UUID().uuidString)
             hourWeather.append(data)
         }

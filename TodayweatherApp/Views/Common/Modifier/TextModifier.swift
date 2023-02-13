@@ -19,6 +19,7 @@ struct TimeTextModifier: ViewModifier {
         content
             .font(.custom(Fonts.bold.rawValue, size: 14))
             .lineLimit(50)
+            .opacity(0.5)
             .fixedSize(horizontal: true, vertical: true)
     }
 }
