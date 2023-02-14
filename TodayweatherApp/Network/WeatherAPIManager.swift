@@ -82,6 +82,10 @@ final class WeatherAPIManager: NSObject, ObservableObject {
             guard let date = Int(array[0]) else { return Date() }
             array[0] = "\(date - 1)"
             hour = 41
+        case ...940:
+            hour = hour - 100 + 1
+            let targetDate = dateFormatter.date(from: array[0] + " 0\(hour)") ?? Date()
+            return targetDate
         default:
             let hourString = "\(hour)"
             let hourArray = Array(hourString).map { String($0) }
@@ -89,7 +93,7 @@ final class WeatherAPIManager: NSObject, ObservableObject {
             hour = (changedHour - 2) * 100 + 41
         }
         
-//        print("초단기 실황 시간 : \(hour)")
+        print("초단기 실황 시간 : \(hour)")
         let targetDate = dateFormatter.date(from: array[0] + " \(hour)") ?? Date()
         return targetDate
     }
