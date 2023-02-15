@@ -50,7 +50,6 @@ struct WeatherWidgetEntryView : View {
 
     var body: some View {
         Image(systemName: "person")
-        Text("안녕하세요")
     }
 }
 

@@ -12,6 +12,9 @@ import SwiftUI
 struct WeatherWidgetBundle: WidgetBundle {
     var body: some Widget {
         WeatherWidget()
-//        WeatherWidgetLiveActivity()
+        
+        if #available(iOS 16.1, *) {
+            WeatherWidgetLiveActivity()
+        }
     }
 }
