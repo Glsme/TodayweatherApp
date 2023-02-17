@@ -29,7 +29,7 @@ struct Provider: IntentTimelineProvider {
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
+            let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
             let entry = SimpleEntry(date: entryDate, configuration: configuration)
             entries.append(entry)
         }
@@ -44,25 +44,34 @@ struct SimpleEntry: TimelineEntry {
     let configuration: ConfigurationIntent
 }
 
+//struct testEntry:
+
 struct WeatherWidgetEntryView : View {
     @Environment(\.widgetFamily) var family: WidgetFamily
     var entry: Provider.Entry
 
     var body: some View {
-        Image(systemName: "person")
+        VStack {
+            Image(systemName: "person")
+            Text("\(entry.date)")
+        }
     }
 }
 
 struct WeatherWidget: Widget {
-    let kind: String = "WeatherWidget"
+    let kind: String = "오늘날씨야"
 
     var body: some WidgetConfiguration {
-        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+        IntentConfiguration(kind: kind,
+                            intent: ConfigurationIntent.self,
+                            provider: Provider()) { entry in
             WeatherWidgetEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("오늘 날씨야~")
+        .description("위젯 크기를 설정해주세요.")
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
+    
 }
 
 struct WeatherWidget_Previews: PreviewProvider {

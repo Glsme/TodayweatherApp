@@ -150,6 +150,7 @@
 		854316D9299BC29800A3686B /* WeatherWidget */ = {
 			isa = PBXGroup;
 			children = (
+				854F2B14299F48C500F80A6A /* Network */,
 				854316DA299BC29800A3686B /* WeatherWidgetBundle.swift */,
 				854316DC299BC29800A3686B /* WeatherWidgetLiveActivity.swift */,
 				854316DE299BC29800A3686B /* WeatherWidget.swift */,
@@ -158,6 +159,13 @@
 				854316E3299BC29900A3686B /* Info.plist */,
 			);
 			path = WeatherWidget;
+			sourceTree = "<group>";
+		};
+		854F2B14299F48C500F80A6A /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		8565BE9D298BF05500CBD52B = {

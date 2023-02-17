@@ -14,7 +14,7 @@ struct WeatherWidgetBundle: WidgetBundle {
         WeatherWidget()
         
         if #available(iOS 16.1, *) {
-            WeatherWidgetLiveActivity()
+//            WeatherWidgetLiveActivity()
         }
     }
 }
