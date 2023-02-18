@@ -13,12 +13,12 @@ import Combine
 struct Provider: IntentTimelineProvider {
     // 특정 내용이 없는 시각적 표현
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+        SimpleEntry(date: Date(), configuration: ConfigurationIntent(), image: "", dumy: "")
     }
 
     // WidgetKit이 위젯이 일시적인 상황에 나타나면 호출하는 함수
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+        let entry = SimpleEntry(date: Date(), configuration: configuration, image: "", dumy: "")
         completion(entry)
     }
 
@@ -30,7 +30,7 @@ struct Provider: IntentTimelineProvider {
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+            let entry = SimpleEntry(date: entryDate, configuration: configuration, image: "moon.fill", dumy: "\(hourOffset)")
             entries.append(entry)
         }
 
@@ -42,6 +42,8 @@ struct Provider: IntentTimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
+    let image: String
+    let dumy: String
 }
 
 //struct testEntry:
@@ -52,8 +54,9 @@ struct WeatherWidgetEntryView : View {
 
     var body: some View {
         VStack {
-            Image(systemName: "person")
+            Image(systemName: entry.image)
             Text("\(entry.date)")
+            Text("\(entry.dumy)")
         }
     }
 }
@@ -76,7 +79,10 @@ struct WeatherWidget: Widget {
 
 struct WeatherWidget_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        WeatherWidgetEntryView(entry: SimpleEntry(date: Date(),
+                                                  configuration: ConfigurationIntent(),
+                                                  image: "",
+                                                  dumy: ""))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
