@@ -32,7 +32,7 @@ struct Provider: IntentTimelineProvider {
             let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
             let entry = SimpleEntry(date: entryDate, configuration: configuration, image: "moon.fill", dumy: "\(hourOffset)")
             entries.append(entry)
-        }
+        } 
 
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)

@@ -17,6 +17,9 @@ struct CurrentWeatherView: View {
             Text("\(administrativeArea) \(subLocality)")
                 .modifier(LocationTextModifier())
             Spacer()
+            Image("sun.max.fill")
+                .resizable()
+                .frame(width: 200, height: 200)
             Text(currentTemp)
                 .modifier(CurrentTempTextModifer())
         }
