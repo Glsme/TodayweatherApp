@@ -19,7 +19,7 @@ struct CurrentWeatherView: View {
             Spacer()
             Image("sun.max.fill")
                 .resizable()
-                .frame(width: 200, height: 200)
+                .aspectRatio(CGSize(width: 200, height: 200), contentMode: .fill)
             Text(currentTemp)
                 .modifier(CurrentTempTextModifer())
         }

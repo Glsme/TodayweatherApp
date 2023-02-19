@@ -16,6 +16,11 @@
 		854316E4299BC29900A3686B /* WeatherWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 854316E0299BC29800A3686B /* WeatherWidget.intentdefinition */; };
 		854316E5299BC29900A3686B /* WeatherWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 854316E0299BC29800A3686B /* WeatherWidget.intentdefinition */; };
 		854316E8299BC29900A3686B /* WeatherWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 854316D3299BC29800A3686B /* WeatherWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		854F2B2229A2086600F80A6A /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEC1298E95D400CBD52B /* APIKey.swift */; };
+		854F2B3529A20C6500F80A6A /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BED7298FBE9F00CBD52B /* GeoConverter.swift */; };
+		854F2B3629A20C7900F80A6A /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BED9298FC48500CBD52B /* Grid.swift */; };
+		854F2B3729A20C8A00F80A6A /* UltraSrtNcst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BED0298FA77400CBD52B /* UltraSrtNcst.swift */; };
+		854F2B3B29A20D3B00F80A6A /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEC4298E986800CBD52B /* EndPoint.swift */; };
 		8565BEAA298BF05500CBD52B /* TodayweatherAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEA9298BF05500CBD52B /* TodayweatherAppApp.swift */; };
 		8565BEAC298BF05500CBD52B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEAB298BF05500CBD52B /* ContentView.swift */; };
 		8565BEAE298BF05700CBD52B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8565BEAD298BF05700CBD52B /* Assets.xcassets */; };
@@ -164,8 +169,16 @@
 		854F2B14299F48C500F80A6A /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				854F2B2A29A20A0B00F80A6A /* Model */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		854F2B2A29A20A0B00F80A6A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		8565BE9D298BF05500CBD52B = {
@@ -451,7 +464,12 @@
 			files = (
 				854316DB299BC29800A3686B /* WeatherWidgetBundle.swift in Sources */,
 				854316DD299BC29800A3686B /* WeatherWidgetLiveActivity.swift in Sources */,
+				854F2B3B29A20D3B00F80A6A /* EndPoint.swift in Sources */,
+				854F2B3629A20C7900F80A6A /* Grid.swift in Sources */,
+				854F2B3729A20C8A00F80A6A /* UltraSrtNcst.swift in Sources */,
 				854316DF299BC29800A3686B /* WeatherWidget.swift in Sources */,
+				854F2B3529A20C6500F80A6A /* GeoConverter.swift in Sources */,
+				854F2B2229A2086600F80A6A /* APIKey.swift in Sources */,
 				854316E4299BC29900A3686B /* WeatherWidget.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

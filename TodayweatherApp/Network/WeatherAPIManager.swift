@@ -29,7 +29,7 @@ final class WeatherAPIManager: NSObject, ObservableObject {
         let convertedDate: Date = convertUltraSrtNcst(date)
         let router = WeatherAPIRouter.ultraSrtNcst(date: convertedDate, grid: convertGrid(coordinate))
         
-        AF.request(router).responseDecodable(of: UltraSrtNcst.self) {response in
+        AF.request(router).responseDecodable(of: UltraSrtNcst.self) { response in
             switch response.result {
             case .success(let data):
                 let items = data.response.body.items.item
