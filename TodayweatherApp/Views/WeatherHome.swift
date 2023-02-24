@@ -20,7 +20,7 @@ struct WeatherHome: View {
             HourWeatherView(hourWeather: $viewModel.hourWeather)
         }
         .onAppear {
-            viewModel.checkUserDeviceLocationAuth()
+            viewModel.locationManager.checkUserDeviceLocationAuth()
         }
     }
 }

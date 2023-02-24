@@ -9,12 +9,13 @@ import Foundation
 import CoreLocation
 
 final class WeatherViewModel: NSObject, ObservableObject {
-    let locationManager = CLLocationManager()
+    //    let locationManager = CLLocationManager()
+    let locationManager = LocationManager()
     
     override init() {
         super.init()
-        
-        locationManager.delegate = self
+        print("View Model init")
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUserLocation(_:)), name: .coordinate, object: nil)
     }
     
     private let network = WeatherAPIManager.shared
@@ -50,11 +51,11 @@ final class WeatherViewModel: NSObject, ObservableObject {
         }
     }
     
-//    private func requestUltraSrtFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
-//        network.requestUltraSrtFcst(date: date, coordinate: coordinate) { result in
-//            dump(result)
-//        }
-//    }
+    //    private func requestUltraSrtFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
+    //        network.requestUltraSrtFcst(date: date, coordinate: coordinate) { result in
+    //            dump(result)
+    //        }
+    //    }
     
     private func requestUltraSrtNcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestUltraSrtNcst(date: date, coordinate: coordinate) { [weak self] result in
@@ -122,7 +123,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
             } else {
                 image = changeWeatherRainSnow($0[2].fcstValue)
             }
-
+            
             let data = HourWeather(date: convertDateKo($0[0].fcstDate),
                                    time: convertHourKo($0[0].fcstTime), // hourWeather.isEmpty ? "현재" : convertHourKo($0[0].fcstTime),
                                    img: image,
@@ -205,55 +206,18 @@ final class WeatherViewModel: NSObject, ObservableObject {
         
         return false
     }
-}
-
-//위치 권한 관련
-extension WeatherViewModel: CLLocationManagerDelegate {
-    func checkUserDeviceLocationAuth() {
-        checkUserCurrentLocationAuth(locationManager.authorizationStatus)
-    }
     
-    private func checkUserCurrentLocationAuth(_ authStatus: CLAuthorizationStatus) {
-        switch authStatus {
-        case .notDetermined:
-            print("not Determined")
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            locationManager.requestWhenInUseAuthorization()
-        case .restricted, .denied:
-            print("restricted or denied, 아이폰 설정 유도")
-        case .authorizedWhenInUse:
-            print("when in use")
-            locationManager.startUpdatingLocation()
-        default:
-            print("Default")
-        }
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let coordinate = locations.last?.coordinate {
-            requestVilageFcst(coordinate: coordinate)
-            requestUltraSrtNcst(coordinate: coordinate)
-            checkUserCurrentLocation(coordinate)
-        }
+    @objc func updateUserLocation(_ notification: Notification) {
+        print(#function)
+        guard let coordinate = notification.object as? CLLocationCoordinate2D else { return }
         
-        locationManager.stopUpdatingLocation()
-    }
-    
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        checkUserDeviceLocationAuth()
-    }
-    
-    // 사용자 위치 변환 및 저장
-    func checkUserCurrentLocation(_ coordinate: CLLocationCoordinate2D) {
-        let findLocation: CLLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-        let geoCoder: CLGeocoder = CLGeocoder()
-        let local: Locale = Locale(identifier: "Ko-kr") // Korea
-        geoCoder.reverseGeocodeLocation(findLocation, preferredLocale: local) { [weak self] place, _ in
+        requestVilageFcst(coordinate: coordinate)
+        requestUltraSrtNcst(coordinate: coordinate)
+        
+        self.locationManager.checkUserCurrentLocation(coordinate) { [weak self] administrativeArea, subLocality in
             guard let self = self else { return }
-            if let address: [CLPlacemark] = place {
-                self.administrativeArea = address.last?.administrativeArea ?? "지역 오류"
-                self.subLocality = address.last?.subLocality ?? "지역 오류"
-            }
+            self.administrativeArea = administrativeArea
+            self.subLocality = subLocality
         }
     }
 }

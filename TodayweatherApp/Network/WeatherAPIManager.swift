@@ -59,7 +59,7 @@ final class WeatherAPIManager: NSObject, ObservableObject {
         let convertedDate: Date = convertVilageFcstDate(date)
         let router = WeatherAPIRouter.vilageFcst(date: convertedDate, grid: convertGrid(coordinate))
         
-        AF.request(router).responseDecodable(of: VilageFcst.self) {response in
+        AF.request(router).responseDecodable(of: VilageFcst.self) { response in
             switch response.result {
             case .success(let data):
                 let items = data.response.body.items.item
