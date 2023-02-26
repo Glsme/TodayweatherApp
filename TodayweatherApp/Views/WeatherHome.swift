@@ -13,10 +13,13 @@ struct WeatherHome: View {
     @StateObject private var viewModel = WeatherViewModel()
     
     var body: some View {
-        ScrollView {
+        VStack(spacing: .zero) {
             CurrentWeatherView(administrativeArea: $viewModel.administrativeArea,
-                             subLocality: $viewModel.subLocality,
-                             currentTemp: $viewModel.currentTemp)
+                               subLocality: $viewModel.subLocality,
+                               currentTemp: $viewModel.currentTemp)
+            .frame(width: UIScreen.main.bounds.width)
+//            .background(Color.gray)
+            
             HourWeatherView(hourWeather: $viewModel.hourWeather)
         }
         .onAppear {

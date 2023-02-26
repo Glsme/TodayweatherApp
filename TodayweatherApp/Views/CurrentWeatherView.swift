@@ -14,21 +14,23 @@ struct CurrentWeatherView: View {
     
     var body: some View {
         VStack {
+            Spacer()
             Text("\(administrativeArea) \(subLocality)")
                 .modifier(LocationTextModifier())
-            Spacer()
+//            Spacer()
             Image("sun.max.fill")
                 .resizable()
-                .aspectRatio(CGSize(width: 200, height: 200), contentMode: .fill)
+                .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
+                .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.width * 0.8, alignment: .center)
             Text(currentTemp)
                 .modifier(CurrentTempTextModifer())
+            Spacer(minLength: UIScreen.main.bounds.height * 0.1)
         }
-        .padding()
     }
 }
 
-//struct TodayWeatherView_Previews: PreviewProvider {
+//struct CurrentWeatherView_Previews: PreviewProvider {
 //    static var previews: some View {
-//        TodayWeatherView()
+//        CurrentWeatherView(administrativeArea: <#T##Binding<String>#>, subLocality: <#T##Binding<String>#>, currentTemp: <#T##Binding<String>#>)
 //    }
 //}
