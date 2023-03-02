@@ -14,9 +14,11 @@ struct CurrentWeatherView: View {
     
     var body: some View {
         VStack {
-            Spacer()
+//            Spacer()
             Text("\(administrativeArea) \(subLocality)")
                 .modifier(LocationTextModifier())
+//            Text("\(Date())")
+//                .modifier(LocationTextModifier())
 //            Spacer()
             Image("sun.max.fill")
                 .resizable()
@@ -24,7 +26,7 @@ struct CurrentWeatherView: View {
                 .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.width * 0.8, alignment: .center)
             Text(currentTemp)
                 .modifier(CurrentTempTextModifer())
-            Spacer(minLength: UIScreen.main.bounds.height * 0.1)
+//            Spacer(minLength: UIScreen.main.bounds.height * 0.1)
         }
     }
 }

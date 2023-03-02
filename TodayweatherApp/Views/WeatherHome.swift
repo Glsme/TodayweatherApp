@@ -19,7 +19,7 @@ struct WeatherHome: View {
                                currentTemp: $viewModel.currentTemp)
             .frame(width: UIScreen.main.bounds.width)
 //            .background(Color.gray)
-            
+            Spacer()
             HourWeatherView(hourWeather: $viewModel.hourWeather)
         }
         .onAppear {
