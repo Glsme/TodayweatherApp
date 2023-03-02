@@ -31,7 +31,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
         let f = DateFormatter()
         f.locale = Locale(identifier: Locale.current.identifier)
         f.timeZone = TimeZone(abbreviation: TimeZone.current.identifier)
-        f.dateFormat = "M월 dd일"
+        f.dateFormat = "M월 d일"
         return f
     }()
     
