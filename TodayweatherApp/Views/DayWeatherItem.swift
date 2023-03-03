@@ -15,7 +15,7 @@ struct DayWeatherItem: View {
             Text(datas.isEmpty ? "" : datas[0].date)
                 .modifier(TempTextModifier())
             Divider()
-                .background(Color(r: 56, g: 99, b: 198))
+                .background(Color.white)
             HStack {
                 ForEach(datas, id: \.self) { data in
                     HourWeatherItem(weatherData: data)
