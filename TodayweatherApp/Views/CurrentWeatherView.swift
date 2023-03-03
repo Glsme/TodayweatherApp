@@ -11,22 +11,22 @@ struct CurrentWeatherView: View {
     @Binding var administrativeArea: String
     @Binding var subLocality: String
     @Binding var currentTemp: String
+    @Binding var currentImage: String
     
     var body: some View {
         VStack {
-//            Spacer()
             Text("\(administrativeArea) \(subLocality)")
                 .modifier(LocationTextModifier())
 //            Text("\(Date())")
 //                .modifier(LocationTextModifier())
-//            Spacer()
-            Image("sun.max.fill")
+            Spacer()
+            Image(currentImage)
                 .resizable()
                 .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
                 .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.width * 0.8, alignment: .center)
             Text(currentTemp)
                 .modifier(CurrentTempTextModifer())
-//            Spacer(minLength: UIScreen.main.bounds.height * 0.1)
+            Spacer()
         }
     }
 }

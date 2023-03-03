@@ -60,6 +60,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
     private func requestUltraSrtNcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestUltraSrtNcst(date: date, coordinate: coordinate) { [weak self] result in
             guard let self = self else { return }
+            dump(result)
             result.forEach {
                 if $0.category == "T1H" {
                     self.currentTemp = $0.obsrValue + " º"
@@ -171,6 +172,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
     
     // [1, 1, 2, 2, 3, 3, ...] -> [[1,1], [2,2], [3,3] ...]
     private func filterVilageFcstData(_ data: [VilageFcstItem]) -> [[VilageFcstItem]] {
+        isNowData(data) // Temp, 초단기 실황에 날씨값이 없는 관계로 기획이 정해지기 전까지 임시로 호출
         let data = data.filter { ($0.category == "TMP" || $0.category == "SKY" || $0.category == "PTY") && isFutureData($0.fcstDate, $0.fcstTime) }
         var filterData: [[VilageFcstItem]] = []
         
@@ -183,6 +185,21 @@ final class WeatherViewModel: NSObject, ObservableObject {
         }
         
         return filterData
+    }
+    
+    private func isNowData(_ data: [VilageFcstItem]) {
+        for item in data {
+            if item.category == "PTY", item.fcstValue != "0" {
+                self.currentWeatherImage = self.changeWeatherRainSnow(item.fcstValue)
+                print("\(self.currentWeatherImage)")
+                break
+            } else if item.category == "SKY" {
+                let isNight = Int(item.fcstTime)! > 1800 || Int(item.fcstTime)! < 600
+                self.currentWeatherImage = self.changeWeatherNoRainSnow(item.fcstValue, isNight: isNight)
+                print("\(self.currentWeatherImage)")
+                break
+            }
+        }
     }
     
     private func isFutureData(_ fcstDate: String, _ fcstTime: String) -> Bool {

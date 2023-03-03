@@ -26,7 +26,8 @@ struct WeatherHome: View {
                 
                 CurrentWeatherView(administrativeArea: $viewModel.administrativeArea,
                                    subLocality: $viewModel.subLocality,
-                                   currentTemp: $viewModel.currentTemp)
+                                   currentTemp: $viewModel.currentTemp,
+                                   currentImage: $viewModel.currentWeatherImage)
             }
             
             ZStack {
