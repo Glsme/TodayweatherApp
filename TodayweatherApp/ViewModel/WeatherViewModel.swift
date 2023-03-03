@@ -40,7 +40,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
     @Published var administrativeArea: String = ""
     @Published var subLocality: String = ""
     @Published var currentTemp: String = ""
-    @Published var currentWeatherImage: String = ""
+    @Published var currentWeatherImage: WeatherImage = .no
     
     private func requestVilageFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestVilageFcst(date: date, coordinate: coordinate) { [weak self] result in
@@ -112,7 +112,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
     
     private func convertVilageFcstData(_ datas: [VilageFcstItem]) -> [HourWeather] {
         var hourWeather: [HourWeather] = []
-        var image: String = ""
+        var image: WeatherImage = .no
         let vilageFcstData: [[VilageFcstItem]] = filterVilageFcstData(datas)
         var isNight: Bool = false
         
@@ -136,37 +136,37 @@ final class WeatherViewModel: NSObject, ObservableObject {
         return hourWeather
     }
     
-    private func changeWeatherNoRainSnow(_ value: String, isNight: Bool) -> String {
+    private func changeWeatherNoRainSnow(_ value: String, isNight: Bool) -> WeatherImage {
         switch value {
         case "1":
-            return isNight ? "moon.stars.fill" : "sun.max.fill"
+            return isNight ? .moon : .sun
         case "3":
-            return isNight ? "cloud.moon.fill": "cloud.sun.fill"
+            return isNight ? .cloudMoon : .cloudSun
         case "4":
-            return "cloud.fill"
+            return isNight ? .cloudNight : .cloudSun
         default:
-            return ""
+            return .no
         }
     }
     
-    private func changeWeatherRainSnow(_ value: String) -> String {
+    private func changeWeatherRainSnow(_ value: String) -> WeatherImage {
         switch value {
         case "1":
-            return "cloud.rain.fill"
+            return .cloudRain
         case "2":
-            return "cloud.sleet.fill"
+            return .no //추후 디자인 받으면 수정 예정
         case "3":
-            return "cloud.snow.fill"
+            return .cloudSnow
         case "4":
-            return "cloud.rain.fill"
+            return .cloudRain
         case "5":
-            return "cloud.rain.fill"
+            return .cloudRain
         case "6":
-            return "cloud.rain.fill"
+            return .cloudRain
         case "7":
-            return "wind.snow"
+            return .no //추후 디자인 받으면 수정 예정
         default:
-            return ""
+            return .no
         }
     }
     

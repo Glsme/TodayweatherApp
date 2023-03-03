@@ -62,6 +62,7 @@
 		85AEBA812997DDD40057BE2C /* CurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AEBA802997DDD40057BE2C /* CurrentWeatherView.swift */; };
 		85B412A129A8A7BF003516AE /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B412A029A8A7BF003516AE /* View+Extension.swift */; };
 		85B412A229A8A934003516AE /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B412A029A8A7BF003516AE /* View+Extension.swift */; };
+		85E226E929B1F4EE00BFCB8A /* WeatherImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E226E829B1F4EE00BFCB8A /* WeatherImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		85AEBA762997C9100057BE2C /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		85AEBA802997DDD40057BE2C /* CurrentWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
 		85B412A029A8A7BF003516AE /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		85E226E829B1F4EE00BFCB8A /* WeatherImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +292,7 @@
 				8565BED7298FBE9F00CBD52B /* GeoConverter.swift */,
 				8565BEDF298FE72600CBD52B /* WeatherURLEncoding.swift */,
 				854F2B4729A301B100F80A6A /* LocationManager.swift */,
+				85E226E829B1F4EE00BFCB8A /* WeatherImage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -505,6 +508,7 @@
 			files = (
 				854F2B4229A2648500F80A6A /* WeatherWidgetProvider.swift in Sources */,
 				85AEBA572995DB5B0057BE2C /* WeatherHome.swift in Sources */,
+				85E226E929B1F4EE00BFCB8A /* WeatherImage.swift in Sources */,
 				85AEBA6A2996460D0057BE2C /* TextModifier.swift in Sources */,
 				8565BEBA298E947900CBD52B /* WeatherAPIManager.swift in Sources */,
 				854F2B4F29A31DE900F80A6A /* WidgetViewModel.swift in Sources */,

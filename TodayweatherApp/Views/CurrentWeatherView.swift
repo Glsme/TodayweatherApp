@@ -11,7 +11,7 @@ struct CurrentWeatherView: View {
     @Binding var administrativeArea: String
     @Binding var subLocality: String
     @Binding var currentTemp: String
-    @Binding var currentImage: String
+    @Binding var currentImage: WeatherImage
     
     var body: some View {
         VStack {
@@ -20,7 +20,7 @@ struct CurrentWeatherView: View {
 //            Text("\(Date())")
 //                .modifier(LocationTextModifier())
             Spacer()
-            Image(currentImage)
+            Image(currentImage.rawValue)
                 .resizable()
                 .aspectRatio(CGSize(width: 1, height: 1), contentMode: .fit)
                 .frame(width: UIScreen.main.bounds.width * 0.8, height: UIScreen.main.bounds.width * 0.8, alignment: .center)

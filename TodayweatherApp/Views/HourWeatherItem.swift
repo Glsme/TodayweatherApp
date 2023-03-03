@@ -14,7 +14,7 @@ struct HourWeatherItem: View {
         VStack {
             Text(weatherData.time)
                 .modifier(TimeTextModifier())
-            Image(weatherData.img)
+            Image(weatherData.img.rawValue)
                 .resizable()
                 .frame(width: 50, height: 50)
             Text(weatherData.temp)
