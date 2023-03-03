@@ -10,11 +10,11 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         ZStack {
-            Color(red: 167/255, green: 219/255, blue: 255/255)
+            Color.black
                 .ignoresSafeArea()
             WeatherHome()
         }
-        .foregroundColor(.blue)
+        .foregroundColor(.white)
     }
 }
 

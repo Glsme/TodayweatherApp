@@ -15,17 +15,18 @@ struct WeatherHome: View {
     var body: some View {
         VStack(spacing: .zero) {
             ZStack {
-                Color.blue
-                    .edgesIgnoringSafeArea(.top)
-                Color(red: 167/255, green: 219/255, blue: 255/255)
-                    .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.65)
+                LinearGradient(colors: [Color(red: 167/255, green: 219/255, blue: 255/255),
+                                        Color(red: 134/255, green: 179/255, blue: 211/255)],
+                               startPoint: .top,
+                               endPoint: .bottom)
+//                Color(red: 167/255, green: 219/255, blue: 255/255)
+                    .cornerRadius(30)
+                    .shadow(color: Color(red: 89/255, green: 117/255, blue: 138/255), radius: 5, x: 0 ,y: 3)
+                    .ignoresSafeArea(.all, edges: .top)
                 
                 CurrentWeatherView(administrativeArea: $viewModel.administrativeArea,
                                    subLocality: $viewModel.subLocality,
                                    currentTemp: $viewModel.currentTemp)
-                .frame(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 0.65)
-                .background(Color.blue)
-                .cornerRadius(30, corners: [.bottomLeft, .bottomRight])
             }
             
             ZStack {
