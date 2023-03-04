@@ -16,9 +16,11 @@ struct WeatherWidgetEntryView : View {
     
     var body: some View {
         VStack {
-            Image(systemName: entry.image)
+            Image("moon")
+                .resizable()
+                .frame(width: 20, height: 20)
             Text("\(entry.date)")
-            Text("\(entry.dumy)")
+//            Text("\(entry.dumy)")
         }
     }
 }
@@ -30,7 +32,10 @@ struct WeatherWidget: Widget {
         IntentConfiguration(kind: kind,
                             intent: ConfigurationIntent.self,
                             provider: Provider()) { entry in
-            WeatherWidgetEntryView(entry: entry)
+            ZStack {
+                Color.blue
+                WeatherWidgetEntryView(entry: entry)
+            }
         }
                             .configurationDisplayName("오늘 날씨야~")
                             .description("위젯 크기를 설정해주세요.")
