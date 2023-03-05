@@ -60,7 +60,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
     private func requestUltraSrtNcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestUltraSrtNcst(date: date, coordinate: coordinate) { [weak self] result in
             guard let self = self else { return }
-            dump(result)
+//            dump(result)
             result.forEach {
                 if $0.category == "T1H" {
                     self.currentTemp = $0.obsrValue + " º"

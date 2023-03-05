@@ -30,6 +30,8 @@
 		854F2B4F29A31DE900F80A6A /* WidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F2B4E29A31DE900F80A6A /* WidgetViewModel.swift */; };
 		854F2B5029A31DE900F80A6A /* WidgetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 854F2B4E29A31DE900F80A6A /* WidgetViewModel.swift */; };
 		854F2B5429A31E7200F80A6A /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 854F2B5329A31E7200F80A6A /* Alamofire */; };
+		855CB5CE29B469F8000FCF90 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 855CB5CD29B469F8000FCF90 /* Alamofire */; };
+		855CB5CF29B46C83000FCF90 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AEBA73299647E30057BE2C /* Fonts.swift */; };
 		8565BEAA298BF05500CBD52B /* TodayweatherAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEA9298BF05500CBD52B /* TodayweatherAppApp.swift */; };
 		8565BEAC298BF05500CBD52B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEAB298BF05500CBD52B /* ContentView.swift */; };
 		8565BEAE298BF05700CBD52B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8565BEAD298BF05700CBD52B /* Assets.xcassets */; };
@@ -144,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				855CB5CE29B469F8000FCF90 /* Alamofire in Frameworks */,
 				854316D8299BC29800A3686B /* SwiftUI.framework in Frameworks */,
 				854316D6299BC29800A3686B /* WidgetKit.framework in Frameworks */,
 			);
@@ -389,6 +392,9 @@
 			dependencies = (
 			);
 			name = WeatherWidgetExtension;
+			packageProductDependencies = (
+				855CB5CD29B469F8000FCF90 /* Alamofire */,
+			);
 			productName = WeatherWidgetExtension;
 			productReference = 854316D3299BC29800A3686B /* WeatherWidgetExtension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -486,6 +492,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				854316DB299BC29800A3686B /* WeatherWidgetBundle.swift in Sources */,
+				855CB5CF29B46C83000FCF90 /* Fonts.swift in Sources */,
 				854316DD299BC29800A3686B /* WeatherWidgetLiveActivity.swift in Sources */,
 				854F2B5029A31DE900F80A6A /* WidgetViewModel.swift in Sources */,
 				854F2B3B29A20D3B00F80A6A /* EndPoint.swift in Sources */,
@@ -833,6 +840,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		854F2B5329A31E7200F80A6A /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 854F2B5229A31E7100F80A6A /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		855CB5CD29B469F8000FCF90 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 854F2B5229A31E7100F80A6A /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;

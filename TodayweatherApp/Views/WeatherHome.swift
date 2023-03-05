@@ -19,21 +19,16 @@ struct WeatherHome: View {
                                         Color(red: 134/255, green: 179/255, blue: 211/255)],
                                startPoint: .top,
                                endPoint: .bottom)
-//                Color(red: 167/255, green: 219/255, blue: 255/255)
                 .cornerRadius(30, corners: [.bottomRight, .bottomLeft])
-                    .shadow(color: Color(red: 89/255, green: 117/255, blue: 138/255), radius: 5, x: 0 ,y: 3)
-                    .ignoresSafeArea(.all, edges: .top)
+                .shadow(color: Color(red: 89/255, green: 117/255, blue: 138/255), radius: 5, x: 0 ,y: 3)
+                .ignoresSafeArea(.all, edges: .top)
                 
                 CurrentWeatherView(administrativeArea: $viewModel.administrativeArea,
                                    subLocality: $viewModel.subLocality,
                                    currentTemp: $viewModel.currentTemp,
                                    currentImage: $viewModel.currentWeatherImage)
             }
-            
-            ZStack {
-                Spacer()
-            }
-//            .background(Color.red)
+            Spacer()
             
             HourWeatherView(hourWeather: $viewModel.hourWeather)
         }

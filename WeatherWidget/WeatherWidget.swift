@@ -16,11 +16,12 @@ struct WeatherWidgetEntryView : View {
     
     var body: some View {
         VStack {
-            Image("moon")
-                .resizable()
-                .frame(width: 20, height: 20)
-            Text("\(entry.date)")
-//            Text("\(entry.dumy)")
+            Image("sun")
+//                .frame(width: 100, height: 100)
+//            Text("\(entry.date)")
+            Text("\(entry.dumy)")
+                .font(.custom(Fonts.semiBold.rawValue, size: 12))
+                .foregroundColor(.white)
         }
     }
 }
