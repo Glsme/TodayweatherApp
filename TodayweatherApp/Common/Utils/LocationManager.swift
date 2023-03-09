@@ -17,13 +17,18 @@ class LocationManager: NSObject {
         locationManager.delegate = self
     }
     
-    func requestLocation(completion: @escaping (_ coordinate: CLLocationCoordinate2D) -> Void) {
+    func requestCoordinate(completion: @escaping (_ coordinate: CLLocationCoordinate2D) -> Void) {
         guard CLLocationManager.locationServicesEnabled() else { return }
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.requestLocation()
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         
+        guard let coordinate = locationManager.location?.coordinate else { return }
+        completion(coordinate)
+    }
+    
+    func requestOnlyLocation(completion: @escaping (_ coordinate: CLLocationCoordinate2D) -> Void) {
         guard let coordinate = locationManager.location?.coordinate else { return }
         completion(coordinate)
     }

@@ -16,7 +16,7 @@ struct WeatherWidgetEntryView : View {
     
     var body: some View {
         VStack {
-            Image("sun")
+//            Image("sun")
 //                .frame(width: 100, height: 100)
 //            Text("\(entry.date)")
             Text("\(entry.dumy)")

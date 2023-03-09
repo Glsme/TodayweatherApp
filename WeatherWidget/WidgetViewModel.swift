@@ -21,17 +21,14 @@ class WidgetViewModel {
     }()
     
     func testLocation(completionHandler: @escaping (String) -> Void) {
-        let locationManager = LocationManager()
-        locationManager.checkUserDeviceLocationAuth()
-        requestUltraSrtNcst(coordinate: CLLocationCoordinate2D(latitude: 37, longitude: 128)) { string in
-            completionHandler(string)
-        }
-//        locationManager.requestLocation { [weak self] coordinate in
-//            guard let self = self else { return }
+        let locationManager = WidgetLocationManager()
+        locationManager.fetchLocation { [weak self] coordinate in
+            guard let self = self else { return }
+            completionHandler("\(coordinate)")
 //            self.requestUltraSrtNcst(coordinate: coordinate) { result in
 //                completionHandler(result)
 //            }
-//        }
+        }
     }
     
     private func requestUltraSrtNcst(date: Date = Date(),
@@ -54,8 +51,7 @@ class WidgetViewModel {
                     }
                 }
             case .failure(_):
-                break
-//                completionHandler("\(response.error?.localizedDescription)!")
+                completionHandler("error")
             }
         }
 
@@ -92,5 +88,35 @@ class WidgetViewModel {
 //        print("초단기 실황 시간 : \(hour)")
         let targetDate = dateFormatter.date(from: array[0] + " \(hour)") ?? Date()
         return targetDate
+    }
+}
+
+
+class WidgetLocationManager: NSObject, CLLocationManagerDelegate {
+    var locationManager: CLLocationManager?
+    private var handler: ((CLLocation) -> Void)?
+
+    override init() {
+        super.init()
+        DispatchQueue.main.async {
+            self.locationManager = CLLocationManager()
+            self.locationManager!.delegate = self
+            if self.locationManager!.authorizationStatus == .notDetermined {
+                self.locationManager!.requestWhenInUseAuthorization()
+            }
+        }
+    }
+    
+    func fetchLocation(handler: @escaping (CLLocation) -> Void) {
+        self.handler = handler
+        self.locationManager!.requestLocation()
+    }
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.handler!(locations.last!)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
     }
 }
