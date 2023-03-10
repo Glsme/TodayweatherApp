@@ -20,7 +20,7 @@ struct WeatherWidgetEntryView : View {
 //                .frame(width: 100, height: 100)
 //            Text("\(entry.date)")
             Text("\(entry.dumy)")
-                .font(.custom(Fonts.semiBold.rawValue, size: 14))
+                .font(.custom(Fonts.bold.rawValue, size: 16))
                 .foregroundColor(.white)
         }
     }
