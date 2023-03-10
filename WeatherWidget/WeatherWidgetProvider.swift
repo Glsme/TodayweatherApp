@@ -27,7 +27,6 @@ struct Provider: IntentTimelineProvider {
     // 현재 시간과 위젯을 업데이트할 향후 시간에 대한 타임라인 항목을 제공
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
         viewModel.testLocation { temp in
-            print(temp)
             var entries: [SimpleEntry] = []
             // Generate a timeline consisting of five entries an hour apart, starting from the current date.
             let currentDate = Date()

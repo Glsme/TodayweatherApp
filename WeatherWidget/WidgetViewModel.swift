@@ -22,12 +22,17 @@ class WidgetViewModel {
     
     func testLocation(completionHandler: @escaping (String) -> Void) {
         let locationManager = WidgetLocationManager()
-        locationManager.fetchLocation { [weak self] coordinate in
-            guard let self = self else { return }
-            completionHandler("\(coordinate)")
-//            self.requestUltraSrtNcst(coordinate: coordinate) { result in
-//                completionHandler(result)
-//            }
+//        locationManager.fetchLocation { coordinate in
+//            guard let self = self else { return }
+//            completionHandler("\(coordinate.coordinate)")
+//            //            self.requestUltraSrtNcst(coordinate: coordinate) { result in
+//            //                completionHandler(result)
+//            //            }
+//        }
+        do {
+            completionHandler("\(try locationManager.updateLocation())")
+        } catch {
+            completionHandler("\(error)")
         }
     }
     
@@ -42,6 +47,7 @@ class WidgetViewModel {
         
         AF.request(url).responseDecodable(of: UltraSrtNcst.self) { response in
             switch response.result {
+                
             case .success(let data):
                 let items = data.response.body.items.item
                 items.forEach {
@@ -54,7 +60,7 @@ class WidgetViewModel {
                 completionHandler("error")
             }
         }
-
+        
     }
     
     private func convertGrid(_ coordinate: CLLocationCoordinate2D) -> Grid {
@@ -85,38 +91,53 @@ class WidgetViewModel {
             hour = (changedHour - 2) * 100 + 41
         }
         
-//        print("초단기 실황 시간 : \(hour)")
+        //        print("초단기 실황 시간 : \(hour)")
         let targetDate = dateFormatter.date(from: array[0] + " \(hour)") ?? Date()
         return targetDate
     }
 }
 
-
 class WidgetLocationManager: NSObject, CLLocationManagerDelegate {
-    var locationManager: CLLocationManager?
-    private var handler: ((CLLocation) -> Void)?
+    let locationManager = CLLocationManager()
 
     override init() {
         super.init()
+
         DispatchQueue.main.async {
-            self.locationManager = CLLocationManager()
-            self.locationManager!.delegate = self
-            if self.locationManager!.authorizationStatus == .notDetermined {
-                self.locationManager!.requestWhenInUseAuthorization()
+            self.locationManager.delegate = self
+            if self.locationManager.authorizationStatus == .notDetermined {
+                self.locationManager.requestWhenInUseAuthorization()
             }
         }
     }
-    
-    func fetchLocation(handler: @escaping (CLLocation) -> Void) {
-        self.handler = handler
-        self.locationManager!.requestLocation()
+
+    func updateLocation() throws -> CLLocationCoordinate2D {
+        if locationManager.isAuthorizedForWidgetUpdates {
+
+//            guard CLLocationManager.locationServicesEnabled() else {
+//                return "에러다 임마"
+//            }
+
+//            locationManager.requestWhenInUseAuthorization()
+//            locationManager.requestLocation()
+//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            guard let coordinate = locationManager.location?.coordinate else { throw LocationError.optionalBindError }
+            return coordinate
+        } else {
+            throw LocationError.optionalBindError
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.handler!(locations.last!)
+
     }
-    
+
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
+}
+
+enum LocationError: String, Error {
+    case optionalBindError = "잠시 후 다시 시도해주세요"
+    case AuthError = "위젯을 사용하려면 위치 권한을 설정해주세요"
 }
