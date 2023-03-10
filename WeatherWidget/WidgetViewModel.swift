@@ -20,17 +20,13 @@ class WidgetViewModel {
         return f
     }()
     
-    func testLocation(completionHandler: @escaping (String) -> Void) {
-        let locationManager = WidgetLocationManager()
-//        locationManager.fetchLocation { coordinate in
-//            guard let self = self else { return }
-//            completionHandler("\(coordinate.coordinate)")
-//            //            self.requestUltraSrtNcst(coordinate: coordinate) { result in
-//            //                completionHandler(result)
-//            //            }
-//        }
+    func getLocation(completionHandler: @escaping (String) -> Void) {
         do {
-            completionHandler("\(try locationManager.updateLocation())")
+            let locationManager = WidgetLocationManager()
+            let coordinate = try locationManager.updateLocation()
+            requestUltraSrtNcst(coordinate: coordinate) { result in
+                completionHandler(result)
+            }
         } catch {
             completionHandler("\(error)")
         }
