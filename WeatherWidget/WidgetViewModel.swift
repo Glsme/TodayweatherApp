@@ -27,8 +27,12 @@ class WidgetViewModel {
             requestUltraSrtNcst(coordinate: coordinate) { result in
                 completionHandler(result)
             }
+        } catch LocationError.optionalBindError {
+            completionHandler("데이터 가져오는 중")
+        } catch LocationError.AuthError {
+            completionHandler("위젯 사용을 위해 위치 권한을 허용해주세요")
         } catch {
-            completionHandler("\(error)")
+            completionHandler("에러가 발생하였습니다. 잠시 기다려주세요")
         }
     }
     
@@ -109,31 +113,23 @@ class WidgetLocationManager: NSObject, CLLocationManagerDelegate {
 
     func updateLocation() throws -> CLLocationCoordinate2D {
         if locationManager.isAuthorizedForWidgetUpdates {
-
-//            guard CLLocationManager.locationServicesEnabled() else {
-//                return "에러다 임마"
-//            }
-
-//            locationManager.requestWhenInUseAuthorization()
-//            locationManager.requestLocation()
-//            locationManager.desiredAccuracy = kCLLocationAccuracyBest
             guard let coordinate = locationManager.location?.coordinate else { throw LocationError.optionalBindError }
             return coordinate
         } else {
-            throw LocationError.optionalBindError
+            throw LocationError.AuthError
         }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 
-    }
+    } 
 
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
 }
 
-enum LocationError: String, Error {
-    case optionalBindError = "잠시 후 다시 시도해주세요"
-    case AuthError = "위젯을 사용하려면 위치 권한을 설정해주세요"
+enum LocationError: Error {
+    case optionalBindError
+    case AuthError
 }
