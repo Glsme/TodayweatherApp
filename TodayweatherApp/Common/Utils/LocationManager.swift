@@ -39,7 +39,7 @@ extension LocationManager: CLLocationManagerDelegate {
         checkUserCurrentLocationAuth(locationManager.authorizationStatus) { }
     }
     
-    private func checkUserCurrentLocationAuth(_ authStatus: CLAuthorizationStatus, completionHandler: () -> Void) {
+    func checkUserCurrentLocationAuth(_ authStatus: CLAuthorizationStatus, completionHandler: () -> Void) {
         switch authStatus {
         case .notDetermined:
             print("not Determined")

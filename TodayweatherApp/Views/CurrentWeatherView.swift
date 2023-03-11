@@ -17,8 +17,8 @@ struct CurrentWeatherView: View {
         VStack {
             Text("\(administrativeArea) \(subLocality)")
                 .modifier(LocationTextModifier())
-//            Text("\(Date())")
-//                .modifier(LocationTextModifier())
+            //            Text("\(Date())")
+            //                .modifier(LocationTextModifier())
             Spacer()
             Image(currentImage.rawValue)
                 .resizable()

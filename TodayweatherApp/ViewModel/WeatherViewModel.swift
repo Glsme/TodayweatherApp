@@ -18,7 +18,10 @@ final class WeatherViewModel: NSObject, ObservableObject {
         NotificationCenter.default.addObserver(self, selector: #selector(updateUserLocation(_:)), name: .coordinate, object: nil)
     }
     
+    private var updateTimer: Timer?
+    
     private let network = WeatherAPIManager.shared
+    private var limmitedUpdateTime: Int = 30
     private let timeFormatter: DateFormatter = {
         let f = DateFormatter()
         f.locale = Locale(identifier: Locale.current.identifier)
@@ -41,6 +44,52 @@ final class WeatherViewModel: NSObject, ObservableObject {
     @Published var subLocality: String = ""
     @Published var currentTemp: String = ""
     @Published var currentWeatherImage: WeatherImage = .no
+    @Published var isUpdateded: Bool = true
+    
+    func checkDataisUpdateded() {
+        initData()
+        
+        if let coordinate = locationManager.locationManager.location?.coordinate {
+            NotificationCenter.default.post(name: .coordinate, object: coordinate)
+        } else {
+            isUpdateded = false
+        }
+    }
+    
+    func initData() {
+        hourWeather.removeAll()
+        administrativeArea = ""
+        subLocality = ""
+        currentTemp = ""
+        currentWeatherImage = .no
+    }
+    
+    func checkUpdatededData() {
+        updateTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(isUpdatededData), userInfo: nil, repeats: true)
+    }
+    
+    @objc private func isUpdatededData() {
+        print("timer running \(limmitedUpdateTime)")
+        limmitedUpdateTime -= 1
+        
+        guard limmitedUpdateTime > 0 else {
+            updateTimer?.invalidate()
+            updateTimer = nil
+            limmitedUpdateTime = 30
+            isUpdateded = false
+            return
+        }
+        guard !hourWeather.isEmpty else { return }
+        guard administrativeArea != "" else { return }
+        guard subLocality != "" else { return }
+        guard currentTemp != "" else { return }
+        guard currentWeatherImage != .no else { return }
+
+        updateTimer?.invalidate()
+        updateTimer = nil
+        limmitedUpdateTime = 30
+        isUpdateded = false
+    }
     
     private func requestVilageFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestVilageFcst(date: date, coordinate: coordinate) { [weak self] result in
@@ -60,7 +109,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
     private func requestUltraSrtNcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestUltraSrtNcst(date: date, coordinate: coordinate) { [weak self] result in
             guard let self = self else { return }
-//            dump(result)
+            //            dump(result)
             result.forEach {
                 if $0.category == "T1H" {
                     self.currentTemp = $0.obsrValue + " º"
@@ -228,6 +277,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
         print(#function)
         guard let coordinate = notification.object as? CLLocationCoordinate2D else { return }
         
+        checkUpdatededData()
         requestVilageFcst(coordinate: coordinate)
         requestUltraSrtNcst(coordinate: coordinate)
         
