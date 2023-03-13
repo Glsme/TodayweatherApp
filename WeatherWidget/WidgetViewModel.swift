@@ -28,7 +28,7 @@ class WidgetViewModel {
                 completionHandler(result)
             }
         } catch LocationError.optionalBindError {
-            completionHandler("데이터 가져오는 중")
+            completionHandler("데이터를 가져오는 중입니다.")
         } catch LocationError.AuthError {
             completionHandler("위젯 사용을 위해 위치 권한을 허용해주세요")
         } catch {
