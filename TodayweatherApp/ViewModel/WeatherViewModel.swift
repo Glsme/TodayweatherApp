@@ -69,7 +69,6 @@ final class WeatherViewModel: NSObject, ObservableObject {
     }
     
     @objc private func isUpdatededData() {
-        print("timer running \(limmitedUpdateTime)")
         limmitedUpdateTime -= 1
         
         guard limmitedUpdateTime > 0 else {
