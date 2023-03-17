@@ -15,12 +15,12 @@ struct Provider: IntentTimelineProvider {
     let viewModel = WidgetViewModel()
     // 특정 내용이 없는 시각적 표현
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), image: "moon", dumy: "")
+        SimpleEntry(date: Date(), image: "moon", text: "")
     }
     
     // WidgetKit이 위젯이 일시적인 상황에 나타나면 호출하는 함수
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), image: "moon", dumy: "")
+        let entry = SimpleEntry(date: Date(), image: "moon", text: "")
         completion(entry)
     }
     
@@ -32,7 +32,7 @@ struct Provider: IntentTimelineProvider {
             let currentDate = Date()
             for hourOffset in 0 ..< 5 {
                 let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
-                let entry = SimpleEntry(date: entryDate, image: "moon", dumy: "\(temp)")
+                let entry = SimpleEntry(date: entryDate, image: "moon", text: "\(temp)")
                 entries.append(entry)
             }
             
@@ -45,5 +45,5 @@ struct Provider: IntentTimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let image: String
-    let dumy: String
+    let text: String
 }

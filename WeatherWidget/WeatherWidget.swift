@@ -17,22 +17,24 @@ struct WeatherWidgetEntryView : View {
     var body: some View {
         switch family {
         case .accessoryCircular:
-            VStack {
-                Image("sun")
-                //                .frame(width: 100, height: 100)
-                //            Text("\(entry.date)")
-                Text("\(entry.dumy)")
-                    .font(.custom(Fonts.bold.rawValue, size: 16))
+                Text("\(entry.text)")
+                    .font(.custom(Fonts.bold.rawValue, size: 20))
+                    .foregroundColor(.white)
+        case .accessoryRectangular:
+            ZStack {
+                Text("\(entry.text)")
+                    .font(.custom(Fonts.bold.rawValue, size: 20))
                     .foregroundColor(.white)
             }
         default:
-            VStack {
-                Image("sun")
-                //                .frame(width: 100, height: 100)
-                //            Text("\(entry.date)")
-                Text("\(entry.dumy)")
-                    .font(.custom(Fonts.bold.rawValue, size: 16))
-                    .foregroundColor(.white)
+            ZStack {
+                Color.blue
+                VStack {
+                    Image("sun")
+                    Text("\(entry.text)")
+                        .font(.custom(Fonts.bold.rawValue, size: 16))
+                        .foregroundColor(.white)
+                }
             }
         }
     }
@@ -51,10 +53,7 @@ struct WeatherWidget: Widget {
         IntentConfiguration(kind: kind,
                             intent: ConfigurationIntent.self,
                             provider: Provider()) { entry in
-            ZStack {
-                Color.blue
-                WeatherWidgetEntryView(entry: entry)
-            }
+            WeatherWidgetEntryView(entry: entry)
         }
                             .configurationDisplayName("오늘 날씨야~")
                             .description("위젯 크기를 설정해주세요.")
