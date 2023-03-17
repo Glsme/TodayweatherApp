@@ -15,20 +15,38 @@ struct WeatherWidgetEntryView : View {
     var entry: Provider.Entry
     
     var body: some View {
-        VStack {
-            Image("sun")
-//                .frame(width: 100, height: 100)
-//            Text("\(entry.date)")
-            Text("\(entry.dumy)")
-                .font(.custom(Fonts.bold.rawValue, size: 16))
-                .foregroundColor(.white)
+        switch family {
+        case .accessoryCircular:
+            VStack {
+                Image("sun")
+                //                .frame(width: 100, height: 100)
+                //            Text("\(entry.date)")
+                Text("\(entry.dumy)")
+                    .font(.custom(Fonts.bold.rawValue, size: 16))
+                    .foregroundColor(.white)
+            }
+        default:
+            VStack {
+                Image("sun")
+                //                .frame(width: 100, height: 100)
+                //            Text("\(entry.date)")
+                Text("\(entry.dumy)")
+                    .font(.custom(Fonts.bold.rawValue, size: 16))
+                    .foregroundColor(.white)
+            }
         }
     }
 }
 
 struct WeatherWidget: Widget {
     let kind: String = "오늘날씨야"
-    
+    let widgets: [WidgetFamily] = {
+        if #available(iOS 16.0, *) {
+            return [.systemSmall ,.systemMedium, .accessoryCircular, .accessoryRectangular]
+        } else {
+            return [.systemSmall, .systemMedium]
+        }
+    }()
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind,
                             intent: ConfigurationIntent.self,
@@ -40,7 +58,7 @@ struct WeatherWidget: Widget {
         }
                             .configurationDisplayName("오늘 날씨야~")
                             .description("위젯 크기를 설정해주세요.")
-                            .supportedFamilies([.systemSmall, .systemMedium])
+                            .supportedFamilies(widgets)
     }
     
 }
