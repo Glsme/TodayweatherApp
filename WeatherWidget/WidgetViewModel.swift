@@ -57,7 +57,7 @@ class WidgetViewModel {
                     }
                 }
             case .failure(_):
-                completionHandler("error")
+                completionHandler("에러가 발생하였습니다. 잠시 기다려주세요")
             }
         }
         
