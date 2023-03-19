@@ -45,6 +45,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
     @Published var currentTemp: String = ""
     @Published var currentWeatherImage: WeatherImage = .no
     @Published var isUpdateded: Bool = true
+    @Published var isUpdatededError: Bool = false
     
     func checkDataisUpdateded() {
         initData()
@@ -62,6 +63,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
         subLocality = ""
         currentTemp = ""
         currentWeatherImage = .no
+        isUpdatededError = false
     }
     
     func checkUpdatededData() {
@@ -76,6 +78,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
             updateTimer = nil
             limmitedUpdateTime = 30
             isUpdateded = false
+            isUpdatededError = true
             return
         }
         guard !hourWeather.isEmpty else { return }

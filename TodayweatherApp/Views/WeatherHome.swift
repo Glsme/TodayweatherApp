@@ -54,6 +54,11 @@ struct WeatherHome: View {
                     .frame(maxWidth: .infinity)
             }
         }
+        .alert(isPresented: $viewModel.isUpdatededError, content: {
+            Alert(title: Text(""),
+                  message: Text("데이터를 불러오는데 실패하였습니다.\n우측위 버튼을 눌러 다시 시도해주세요."),
+                  dismissButton: .default(Text("확인")))
+        })
         .onAppear {
             viewModel.locationManager.checkUserDeviceLocationAuth()
         }
