@@ -16,10 +16,6 @@ struct WeatherWidgetEntryView : View {
     
     var body: some View {
         switch family {
-        case .accessoryCircular:
-                Text("\(entry.text)")
-                    .font(.custom(Fonts.bold.rawValue, size: 20))
-                    .foregroundColor(.white)
         case .accessoryRectangular:
             ZStack {
                 Text("\(entry.text)")
@@ -44,7 +40,7 @@ struct WeatherWidget: Widget {
     let kind: String = "오늘날씨야"
     let widgets: [WidgetFamily] = {
         if #available(iOS 16.0, *) {
-            return [.systemSmall ,.systemMedium, .accessoryCircular, .accessoryRectangular]
+            return [.systemSmall ,.systemMedium, .accessoryRectangular]
         } else {
             return [.systemSmall, .systemMedium]
         }
