@@ -37,7 +37,7 @@ struct WeatherWidgetEntryView : View {
 }
 
 struct WeatherWidget: Widget {
-    let kind: String = "오늘날씨야"
+    let kind: String = "웨어웨더"
     let widgets: [WidgetFamily] = {
         if #available(iOS 16.0, *) {
             return [.systemSmall ,.systemMedium, .accessoryRectangular]
@@ -45,13 +45,14 @@ struct WeatherWidget: Widget {
             return [.systemSmall, .systemMedium]
         }
     }()
+    
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind,
                             intent: ConfigurationIntent.self,
                             provider: Provider()) { entry in
             WeatherWidgetEntryView(entry: entry)
         }
-                            .configurationDisplayName("오늘 날씨야~")
+                            .configurationDisplayName("웨어 웨더")
                             .description("위젯 크기를 설정해주세요.")
                             .supportedFamilies(widgets)
     }
