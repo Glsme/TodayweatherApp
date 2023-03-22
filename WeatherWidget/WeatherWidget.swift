@@ -26,7 +26,6 @@ struct WeatherWidgetEntryView : View {
             ZStack {
                 Color.blue
                 VStack {
-                    Image("sun")
                     Text("\(entry.text)")
                         .font(.custom(Fonts.bold.rawValue, size: 16))
                         .foregroundColor(.white)
