@@ -62,6 +62,8 @@
 		85AEBA74299647E30057BE2C /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AEBA73299647E30057BE2C /* Fonts.swift */; };
 		85AEBA772997C9100057BE2C /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AEBA762997C9100057BE2C /* Color+Extension.swift */; };
 		85AEBA812997DDD40057BE2C /* CurrentWeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85AEBA802997DDD40057BE2C /* CurrentWeatherView.swift */; };
+		85B1D63A29D17BB0009FA068 /* UltraSrtFcst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859EDF0529927990002FFE35 /* UltraSrtFcst.swift */; };
+		85B1D63B29D17BBF009FA068 /* WeatherNetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859EDF0329912576002FFE35 /* WeatherNetworkType.swift */; };
 		85B412A129A8A7BF003516AE /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B412A029A8A7BF003516AE /* View+Extension.swift */; };
 		85B412A229A8A934003516AE /* View+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B412A029A8A7BF003516AE /* View+Extension.swift */; };
 		85C42F7B29BB11BF00FBC470 /* SUIT-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85AEBA712996477C0057BE2C /* SUIT-Light.ttf */; };
@@ -499,6 +501,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85B1D63B29D17BBF009FA068 /* WeatherNetworkType.swift in Sources */,
 				854316DB299BC29800A3686B /* WeatherWidgetBundle.swift in Sources */,
 				855CB5CF29B46C83000FCF90 /* Fonts.swift in Sources */,
 				854316DD299BC29800A3686B /* WeatherWidgetLiveActivity.swift in Sources */,
@@ -513,6 +516,7 @@
 				854F2B3529A20C6500F80A6A /* GeoConverter.swift in Sources */,
 				854F2B2229A2086600F80A6A /* APIKey.swift in Sources */,
 				85B412A229A8A934003516AE /* View+Extension.swift in Sources */,
+				85B1D63A29D17BB0009FA068 /* UltraSrtFcst.swift in Sources */,
 				854316E4299BC29900A3686B /* WeatherWidget.intentdefinition in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

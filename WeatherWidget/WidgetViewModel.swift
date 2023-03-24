@@ -24,7 +24,10 @@ final class WidgetViewModel {
         do {
             let locationManager = WidgetLocationManager()
             let coordinate = try locationManager.updateLocation()
-            requestUltraSrtNcst(coordinate: coordinate) { result in
+//            requestUltraSrtNcst(coordinate: coordinate) { result in
+//                completionHandler(result)
+//            }
+            requestUltraSrtFcst(coordinate: coordinate) { result in
                 completionHandler(result)
             }
         } catch LocationError.optionalBindError {
@@ -42,12 +45,10 @@ final class WidgetViewModel {
         let date = convertUltraSrtNcst(Date())
         let dateArray = dateFormatter.string(from: date).split(separator: " ")
         let grid = convertGrid(coordinate)
-        
         let url: String = "\(EndPoint.ultraSrtNcstURL)" + "getUltraSrtNcst?" + "base_date=\(dateArray[0])&" + "base_time=\(dateArray[1])&" + "dataType=JSON&" + "numOfRows=100&" + "pageNo=1&" + "nx=\(Int(grid.nx))&" + "ny=\(Int(grid.ny))&" + "serviceKey=\(APIKey.encodingKey)"
         
         AF.request(url).responseDecodable(of: UltraSrtNcst.self) { response in
             switch response.result {
-                
             case .success(let data):
                 let items = data.response.body.items.item
                 items.forEach {
@@ -56,6 +57,32 @@ final class WidgetViewModel {
                         return
                     }
                 }
+            case .failure(_):
+                completionHandler("에러가 발생하였습니다. 잠시 기다려주세요")
+            }
+        }
+    }
+    
+    private func requestUltraSrtFcst(date: Date = Date(),
+                                     coordinate: CLLocationCoordinate2D,
+                                     completionHandler: @escaping (String) -> Void) {
+        let date = convertUltraSrtFcst(date)
+        let dateArray = dateFormatter.string(from: date).split(separator: " ")
+        let grid = convertGrid(coordinate)
+        let url: String = "\(EndPoint.ultraSrtNcstURL)" + "base_date=\(dateArray[0])&" + "base_time=\(dateArray[1])&" + "dataType=JSON&" + "numOfRows=100&" + "pageNo=1&" + "nx=\(Int(grid.nx))&" + "ny=\(Int(grid.ny))&" + "serviceKey=\(APIKey.encodingKey)"
+        
+        AF.request(url).responseDecodable(of: UltraSrtFcst.self) { response in
+            switch response.result {
+            case .success(let data):
+                let items = data.response.body.items.item
+                for item in items {
+                    if item.category == "RN1", item.fcstValue != "0" {
+                        completionHandler("비올 수 있으니깐\n우산챙기세요!")
+                        break
+                    }
+                    completionHandler("비안와요~")
+                }
+                completionHandler("\(data)")
             case .failure(_):
                 completionHandler("에러가 발생하였습니다. 잠시 기다려주세요")
             }
@@ -94,14 +121,36 @@ final class WidgetViewModel {
         let targetDate = dateFormatter.date(from: array[0] + " \(hour)") ?? Date()
         return targetDate
     }
+    
+    // - Base_time: 매 시간 정각
+    // - API 제공 시간(~이후): 매 시간 45분 이후
+    private func convertUltraSrtFcst(_ date: Date) -> Date {
+        var array = dateFormatter.string(from: date).split(separator: " ")
+        guard var hour = Int(array[1]) else { return Date() }
+
+        switch hour {
+        case 0...40:
+            guard let date = Int(array[0]) else { return Date() }
+            array[0] = "\(date - 1)"
+            hour = 46
+        default:
+            let hourString = "\(hour)"
+            let hourArray = Array(hourString).map { String($0) }
+            let changedHour = Int(hourArray[0] + hourArray[1])!
+            hour = (changedHour - 2) * 100 + 46
+        }
+
+        let targetDate = dateFormatter.date(from: array[0] + " \(hour)") ?? Date()
+        return targetDate
+    }
 }
 
 class WidgetLocationManager: NSObject, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
-
+    
     override init() {
         super.init()
-
+        
         DispatchQueue.main.async {
             self.locationManager.delegate = self
             if self.locationManager.authorizationStatus == .notDetermined {
@@ -109,7 +158,7 @@ class WidgetLocationManager: NSObject, CLLocationManagerDelegate {
             }
         }
     }
-
+    
     func updateLocation() throws -> CLLocationCoordinate2D {
         if locationManager.isAuthorizedForWidgetUpdates {
             guard let coordinate = locationManager.location?.coordinate else { throw LocationError.optionalBindError }
@@ -118,11 +167,11 @@ class WidgetLocationManager: NSObject, CLLocationManagerDelegate {
             throw LocationError.AuthError
         }
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-
-    } 
-
+        
+    }
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
     }
