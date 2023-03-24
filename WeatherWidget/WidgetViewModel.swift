@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import CoreLocation
 
-class WidgetViewModel {
+final class WidgetViewModel {
     var currentTemp: String = ""
     
     private let dateFormatter: DateFormatter = {
@@ -60,7 +60,6 @@ class WidgetViewModel {
                 completionHandler("에러가 발생하였습니다. 잠시 기다려주세요")
             }
         }
-        
     }
     
     private func convertGrid(_ coordinate: CLLocationCoordinate2D) -> Grid {
