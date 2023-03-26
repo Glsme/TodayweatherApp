@@ -27,7 +27,7 @@ struct WeatherWidgetEntryView : View {
                 Color.blue
                 VStack {
                     Text("\(entry.text)")
-                        .font(.custom(Fonts.bold.rawValue, size: 16))
+                        .font(.custom(Fonts.bold.rawValue, size: 12))
                         .foregroundColor(.white)
                 }
             }

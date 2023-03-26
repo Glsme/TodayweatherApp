@@ -69,7 +69,8 @@ final class WidgetViewModel {
         let date = convertUltraSrtFcst(date)
         let dateArray = dateFormatter.string(from: date).split(separator: " ")
         let grid = convertGrid(coordinate)
-        let url: String = "\(EndPoint.ultraSrtNcstURL)" + "base_date=\(dateArray[0])&" + "base_time=\(dateArray[1])&" + "dataType=JSON&" + "numOfRows=100&" + "pageNo=1&" + "nx=\(Int(grid.nx))&" + "ny=\(Int(grid.ny))&" + "serviceKey=\(APIKey.encodingKey)"
+        
+        let url: String = "\(EndPoint.ultraSrtNcstURL)" + "getUltraSrtFcst?" + "base_date=\(dateArray[0])&" + "base_time=\(dateArray[1])&" + "dataType=JSON&" + "numOfRows=100&" + "pageNo=1&" + "nx=\(Int(grid.nx))&" + "ny=\(Int(grid.ny))&" + "serviceKey=\(APIKey.encodingKey)"
         
         AF.request(url).responseDecodable(of: UltraSrtFcst.self) { response in
             switch response.result {
