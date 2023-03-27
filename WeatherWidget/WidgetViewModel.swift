@@ -79,7 +79,7 @@ final class WidgetViewModel {
             case .success(let data):
                 let items = data.response.body.items.item
                 for item in items {
-                    if item.category == "RN1", item.fcstValue != "0" {
+                    if item.category == "RN1", item.fcstValue != "강수없음" {
                         completionHandler("비올 수 있으니깐\n우산챙기세요!")
                         break
                     }
