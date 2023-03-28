@@ -24,14 +24,12 @@ final class WidgetViewModel {
         do {
             let locationManager = WidgetLocationManager()
             let coordinate = try locationManager.updateLocation()
-            var resultText: String = ""
-            requestUltraSrtNcst(coordinate: coordinate) { result in
-                resultText = result
+            requestUltraSrtNcst(coordinate: coordinate) { first in
+                self.requestUltraSrtFcst(coordinate: coordinate) { second in
+                    completionHandler(first + "\n" + second)
+                }
             }
-            requestUltraSrtFcst(coordinate: coordinate) { result in
-                resultText = resultText + "\n" + result
-                completionHandler(resultText)
-            }
+            
         } catch LocationError.optionalBindError {
             completionHandler("데이터를 가져오는 중입니다.")
         } catch LocationError.AuthError {

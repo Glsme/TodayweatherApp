@@ -19,7 +19,7 @@ struct WeatherWidgetEntryView : View {
         case .accessoryRectangular:
             ZStack {
                 Text("\(entry.text)")
-                    .font(.custom(Fonts.bold.rawValue, size: 20))
+                    .font(.custom(Fonts.bold.rawValue, size: 16))
                     .foregroundColor(.white)
             }
         default:
@@ -27,7 +27,7 @@ struct WeatherWidgetEntryView : View {
                 Color.blue
                 VStack {
                     Text("\(entry.text)")
-                        .font(.custom(Fonts.bold.rawValue, size: 12))
+                        .font(.custom(Fonts.bold.rawValue, size: 16))
                         .foregroundColor(.white)
                 }
             }
