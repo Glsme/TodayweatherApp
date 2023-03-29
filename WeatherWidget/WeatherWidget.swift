@@ -18,15 +18,15 @@ struct WeatherWidgetEntryView : View {
         switch family {
         case .accessoryRectangular:
             ZStack {
-                Text("\(entry.text)")
+                Text("\(entry.text)1")
                     .font(.custom(Fonts.bold.rawValue, size: 16))
                     .foregroundColor(.white)
             }
         default:
             ZStack {
-                Color.blue
+                Color.black
                 VStack {
-                    Text("\(entry.text)")
+                    Text("\(entry.text)2")
                         .font(.custom(Fonts.bold.rawValue, size: 16))
                         .foregroundColor(.white)
                 }

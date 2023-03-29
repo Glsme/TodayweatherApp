@@ -102,11 +102,11 @@ final class WeatherViewModel: NSObject, ObservableObject {
         }
     }
     
-    //    private func requestUltraSrtFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
-    //        network.requestUltraSrtFcst(date: date, coordinate: coordinate) { result in
-    //            dump(result)
-    //        }
-    //    }
+//        private func requestUltraSrtFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
+//            network.requestUltraSrtFcst(date: date, coordinate: coordinate) { result in
+//                print("success")
+//            }
+//        }
     
     private func requestUltraSrtNcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestUltraSrtNcst(date: date, coordinate: coordinate) { [weak self] result in
@@ -282,6 +282,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
         checkUpdatededData()
         requestVilageFcst(coordinate: coordinate)
         requestUltraSrtNcst(coordinate: coordinate)
+//        requestUltraSrtFcst(coordinate: coordinate)
         
         self.locationManager.checkUserCurrentLocation(coordinate) { [weak self] administrativeArea, subLocality in
             guard let self = self else { return }

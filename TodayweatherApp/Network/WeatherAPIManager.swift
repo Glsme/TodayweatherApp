@@ -43,7 +43,7 @@ final class WeatherAPIManager: NSObject, ObservableObject {
 //    func requestUltraSrtFcst(date: Date, coordinate: CLLocationCoordinate2D, completion: @escaping ([UltraSrtFcstItem]) -> Void) {
 //        let convertedDate: Date = convertUltraSrtFcst(date)
 //        let router = WeatherAPIRouter.ultraSrtFcst(date: convertedDate, grid: convertGrid(coordinate))
-//        
+//
 //        AF.request(router).responseDecodable(of: UltraSrtFcst.self) {response in
 //            switch response.result {
 //            case .success(let data):
