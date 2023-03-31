@@ -25,10 +25,9 @@ final class WidgetViewModel {
             let locationManager = WidgetLocationManager()
             let coordinate = try locationManager.updateLocation()
             requestUltraSrtNcst(coordinate: coordinate) { first in
-//                self.requestUltraSrtFcst(coordinate: coordinate) { second in
-//                    completionHandler(first + "\n" + second)
-                    completionHandler(first)
-//                }
+                self.requestUltraSrtFcst(coordinate: coordinate) { second in
+                    completionHandler(first + "\n" + second)
+                }
             }
             
         } catch LocationError.optionalBindError {
@@ -47,8 +46,9 @@ final class WidgetViewModel {
         let dateArray = dateFormatter.string(from: date).split(separator: " ")
         let grid = convertGrid(coordinate)
         let url: String = "\(EndPoint.ultraSrtNcstURL)" + "getUltraSrtNcst?" + "base_date=\(dateArray[0])&" + "base_time=\(dateArray[1])&" + "dataType=JSON&" + "numOfRows=100&" + "pageNo=1&" + "nx=\(Int(grid.nx))&" + "ny=\(Int(grid.ny))&" + "serviceKey=\(APIKey.encodingKey)"
+        let header: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", "accept": "application/json"]
         
-        AF.request(url).responseDecodable(of: UltraSrtNcst.self) { response in
+        AF.request(url, headers: header).responseDecodable(of: UltraSrtNcst.self) { response in
             switch response.result {
             case .success(let data):
                 let items = data.response.body.items.item
@@ -72,19 +72,19 @@ final class WidgetViewModel {
         let grid = convertGrid(coordinate)
         
         let url: String = "\(EndPoint.ultraSrtNcstURL)" + "getUltraSrtFcst?" + "base_date=\(dateArray[0])&" + "base_time=\(dateArray[1])&" + "dataType=JSON&" + "numOfRows=100&" + "pageNo=1&" + "nx=\(Int(grid.nx))&" + "ny=\(Int(grid.ny))&" + "serviceKey=\(APIKey.encodingKey)"
+        let header: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", "accept": "application/json"]
         
-        AF.request(url).responseDecodable(of: UltraSrtFcst.self) { response in
+        AF.request(url, headers: header).responseDecodable(of: UltraSrtFcst.self) { response in
             switch response.result {
             case .success(let data):
                 let items = data.response.body.items.item
-                for item in items {
-                    if item.category == "RN1", item.fcstValue != "강수없음" {
-                        completionHandler("비올 수 있으니깐\n우산챙기세요!")
-                        break
-                    }
-                    completionHandler("비안와요~")
+                
+                for item in items where item.category == "RN1" && item.fcstValue != "강수없음" {
+                    completionHandler("비올 수 있으니깐\n우산챙기세요!")
+                    return
                 }
-                completionHandler("\(data)")
+                
+                completionHandler("비안와요~")
             case .failure(_):
                 completionHandler("에러가 발생하였습니다. 잠시 기다려주세요")
             }

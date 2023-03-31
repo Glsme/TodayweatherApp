@@ -30,8 +30,8 @@ struct Provider: IntentTimelineProvider {
             // Generate a timeline consisting of five entries an hour apart, starting from the current date.
             let refreshTime = temp == "위젯 사용을 위해 위치 권한을 허용해주세요" ? 5 : 20
             let currentDate = Date()
-                let entryDate = Calendar.current.date(byAdding: .minute, value: refreshTime, to: currentDate)!
-                let entry = SimpleEntry(date: entryDate, image: "moon", text: "\(temp)")
+            let entryDate = Calendar.current.date(byAdding: .minute, value: 1, to: currentDate)!
+            let entry = SimpleEntry(date: entryDate, image: "moon", text: "\(temp)")
             let timeline = Timeline(entries: [entry], policy: .atEnd)
             completion(timeline)
         }
