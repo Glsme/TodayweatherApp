@@ -25,9 +25,10 @@ final class WidgetViewModel {
             let locationManager = WidgetLocationManager()
             let coordinate = try locationManager.updateLocation()
             requestUltraSrtNcst(coordinate: coordinate) { first in
-                self.requestUltraSrtFcst(coordinate: coordinate) { second in
-                    completionHandler(first + "\n" + second)
-                }
+//                self.requestUltraSrtFcst(coordinate: coordinate) { second in
+//                    completionHandler(first + "\n" + second)
+                    completionHandler(first)
+//                }
             }
             
         } catch LocationError.optionalBindError {

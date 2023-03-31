@@ -27,16 +27,12 @@ struct Provider: IntentTimelineProvider {
     // 현재 시간과 위젯을 업데이트할 향후 시간에 대한 타임라인 항목을 제공
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<SimpleEntry>) -> ()) {
         viewModel.getLocation { temp in
-            var entries: [SimpleEntry] = []
             // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+            let refreshTime = temp == "위젯 사용을 위해 위치 권한을 허용해주세요" ? 5 : 20
             let currentDate = Date()
-            for hourOffset in 0 ..< 5 {
-                let entryDate = Calendar.current.date(byAdding: .minute, value: hourOffset, to: currentDate)!
+                let entryDate = Calendar.current.date(byAdding: .minute, value: refreshTime, to: currentDate)!
                 let entry = SimpleEntry(date: entryDate, image: "moon", text: "\(temp)")
-                entries.append(entry)
-            }
-            
-            let timeline = Timeline(entries: entries, policy: .atEnd)
+            let timeline = Timeline(entries: [entry], policy: .atEnd)
             completion(timeline)
         }
     }
