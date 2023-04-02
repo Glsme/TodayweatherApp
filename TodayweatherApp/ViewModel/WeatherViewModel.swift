@@ -60,11 +60,13 @@ final class WeatherViewModel: NSObject, ObservableObject {
     func checkDataisUpdateded() {
         initData()
         
-        guard isAuthorizedLocation else {
+        if locationManager.locationManager.authorizationStatus != .authorizedWhenInUse {
             print("권한 설정 유도 필요")
-            isAuthorizedLocation.toggle()
+            isAuthorizedLocation = true
             isUpdateded = false
-            return }
+            return
+        }
+        
         if let coordinate = locationManager.locationManager.location?.coordinate {
             NotificationCenter.default.post(name: .coordinate, object: coordinate)
         } else {
