@@ -37,8 +37,3 @@ struct Provider: IntentTimelineProvider {
         }
     }
 }
-
-struct WeatherData: TimelineEntry {
-    let date: Date
-    let text: String
-}
