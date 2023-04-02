@@ -36,7 +36,7 @@ struct WeatherWidgetEntryView : View {
 }
 
 struct WeatherWidget: Widget {
-    let kind: String = "오늘비옴?"
+    let kind: String = "우산챙겨"
     let widgets: [WidgetFamily] = {
         if #available(iOS 16.0, *) {
             return [.systemSmall ,.systemMedium, .accessoryRectangular]
@@ -51,7 +51,7 @@ struct WeatherWidget: Widget {
                             provider: Provider()) { entry in
             WeatherWidgetEntryView(entry: entry)
         }
-                            .configurationDisplayName("오늘비옴?")
+                            .configurationDisplayName("우산챙겨")
                             .description("위젯 크기를 설정해주세요.")
                             .supportedFamilies(widgets)
     }

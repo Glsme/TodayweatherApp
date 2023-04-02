@@ -585,7 +585,7 @@
 				DEVELOPMENT_TEAM = 3K4KWAG7KD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "오늘비옴?";
+				INFOPLIST_KEY_CFBundleDisplayName = "우산챙겨";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSLocationUsageDescription = 1;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -614,7 +614,7 @@
 				DEVELOPMENT_TEAM = 3K4KWAG7KD;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WeatherWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "오늘비옴?";
+				INFOPLIST_KEY_CFBundleDisplayName = "우산챙겨";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSLocationUsageDescription = 1;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -761,7 +761,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodayweatherApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "오늘비옴?";
+				INFOPLIST_KEY_CFBundleDisplayName = "우산챙겨";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 현재 위치에 따라 날씨 정보를 받아오기 위해 권한 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "사용자의 현재 위치에 따라 날씨 정보를 받아오기 위해 권한 필요합니다.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "사용자의 현재 위치에 따라 날씨 정보를 받아오기 위해 권한 필요합니다.";
@@ -802,7 +802,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodayweatherApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "오늘비옴?";
+				INFOPLIST_KEY_CFBundleDisplayName = "우산챙겨";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "사용자의 현재 위치에 따라 날씨 정보를 받아오기 위해 권한 필요합니다.";
 				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "사용자의 현재 위치에 따라 날씨 정보를 받아오기 위해 권한 필요합니다.";
 				INFOPLIST_KEY_NSLocationUsageDescription = "사용자의 현재 위치에 따라 날씨 정보를 받아오기 위해 권한 필요합니다.";

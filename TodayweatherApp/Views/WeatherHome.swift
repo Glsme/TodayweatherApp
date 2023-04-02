@@ -56,11 +56,21 @@ struct WeatherHome: View {
         }
         .alert(isPresented: $viewModel.isUpdatededError, content: {
             Alert(title: Text(""),
-                  message: Text("데이터를 불러오는데 실패하였습니다.\n우측위 버튼을 눌러 다시 시도해주세요."),
+                  message: Text("데이터를 불러오는데 실패하였습니다.\n우측 위 버튼을 눌러 다시 시도해주세요."),
                   dismissButton: .default(Text("확인")))
         })
+        .alert(isPresented: $viewModel.isAuthorizedLocation, content: {
+            Alert(title: Text("위치 권한 설정"),
+                  message: Text("앱 사용을 위해 위치 권한 설정 후 이용해주세요"),
+                  primaryButton: .default(Text("설정으로 이동"), action: {
+                if let appSetting = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(appSetting)
+                }
+            }),
+                  secondaryButton: .cancel(Text("취소")))
+        })
         .onAppear {
-            viewModel.locationManager.checkUserDeviceLocationAuth()
+            viewModel.checkLocation()
         }
     }
 }

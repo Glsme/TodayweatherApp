@@ -35,38 +35,42 @@ class LocationManager: NSObject {
 }
 
 extension LocationManager: CLLocationManagerDelegate {
-    func checkUserDeviceLocationAuth() {
-        checkUserCurrentLocationAuth(locationManager.authorizationStatus) { }
+    func checkUserDeviceLocationAuth() -> Bool? {
+        return checkUserCurrentLocationAuth(locationManager.authorizationStatus)
     }
     
-    func checkUserCurrentLocationAuth(_ authStatus: CLAuthorizationStatus, completionHandler: () -> Void) {
+    func checkUserCurrentLocationAuth(_ authStatus: CLAuthorizationStatus) -> Bool? {
         switch authStatus {
         case .notDetermined:
             print("not Determined")
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.requestWhenInUseAuthorization()
+            return nil
         case .restricted, .denied:
             print("restricted or denied, 아이폰 설정 유도")
+            return false
         case .authorizedWhenInUse:
             print("when in use")
             locationManager.startUpdatingLocation()
-            completionHandler()
+            return true
         default:
-            print("Default")
+            return nil
         }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) { }
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        print(#function)
-        
-        checkUserCurrentLocationAuth(locationManager.authorizationStatus) { [weak self] in
-            guard let self = self else { return }
-            guard let coordinate = manager.location?.coordinate else { return }
-            self.coordinate = coordinate
-            NotificationCenter.default.post(name: .coordinate, object: coordinate)
+        guard let result = checkUserCurrentLocationAuth(locationManager.authorizationStatus) else { return }
+        guard result else {
+            NotificationCenter.default.post(name: .notAuthLocation, object: nil)
+            return
         }
+        
+        print(#function, result)
+        guard let coordinate = manager.location?.coordinate else { return }
+        self.coordinate = coordinate
+        NotificationCenter.default.post(name: .coordinate, object: coordinate)
     }
     
     // 사용자 위치 변환 및 저장

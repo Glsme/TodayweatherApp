@@ -16,6 +16,7 @@ final class WeatherViewModel: NSObject, ObservableObject {
         super.init()
         print("View Model init")
         NotificationCenter.default.addObserver(self, selector: #selector(updateUserLocation(_:)), name: .coordinate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(goToSetting(_:)), name: .notAuthLocation, object: nil)
     }
     
     private var updateTimer: Timer?
@@ -46,10 +47,24 @@ final class WeatherViewModel: NSObject, ObservableObject {
     @Published var currentWeatherImage: WeatherImage = .no
     @Published var isUpdateded: Bool = true
     @Published var isUpdatededError: Bool = false
+    @Published var isAuthorizedLocation: Bool = false
+    
+    func checkLocation() {
+        guard let result = locationManager.checkUserDeviceLocationAuth() else { return }
+        isAuthorizedLocation = !result
+        print("아이폰 설정 \(isAuthorizedLocation)")
+        
+        isUpdateded = !isAuthorizedLocation
+    }
     
     func checkDataisUpdateded() {
         initData()
         
+        guard isAuthorizedLocation else {
+            print("권한 설정 유도 필요")
+            isAuthorizedLocation.toggle()
+            isUpdateded = false
+            return }
         if let coordinate = locationManager.locationManager.location?.coordinate {
             NotificationCenter.default.post(name: .coordinate, object: coordinate)
         } else {
@@ -289,5 +304,11 @@ final class WeatherViewModel: NSObject, ObservableObject {
             self.administrativeArea = administrativeArea
             self.subLocality = subLocality
         }
+    }
+    
+    @objc func goToSetting(_ notification: Notification) {
+        print(#function)
+        isAuthorizedLocation = true
+        isUpdateded = false
     }
 }

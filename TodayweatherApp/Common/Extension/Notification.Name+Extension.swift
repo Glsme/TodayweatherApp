@@ -9,4 +9,5 @@ import Foundation
 
 extension Notification.Name {
     static let coordinate = NSNotification.Name("coordinate")
+    static let notAuthLocation = NSNotification.Name("notAuthLocation")
 }
