@@ -45,6 +45,7 @@
 		8565BED8298FBE9F00CBD52B /* GeoConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BED7298FBE9F00CBD52B /* GeoConverter.swift */; };
 		8565BEDA298FC48500CBD52B /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BED9298FC48500CBD52B /* Grid.swift */; };
 		8565BEE0298FE72600CBD52B /* WeatherURLEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8565BEDF298FE72600CBD52B /* WeatherURLEncoding.swift */; };
+		858210A329D99DB9008394E0 /* WidgetResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DA656429D99715000367CA /* WidgetResult.swift */; };
 		859EDF0429912576002FFE35 /* WeatherNetworkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859EDF0329912576002FFE35 /* WeatherNetworkType.swift */; };
 		859EDF0629927990002FFE35 /* UltraSrtFcst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859EDF0529927990002FFE35 /* UltraSrtFcst.swift */; };
 		859EDF0829927C57002FFE35 /* VilageFcst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 859EDF0729927C57002FFE35 /* VilageFcst.swift */; };
@@ -556,6 +557,7 @@
 				8565BEAA298BF05500CBD52B /* TodayweatherAppApp.swift in Sources */,
 				85AEBA6129961AFA0057BE2C /* HourWeatherItem.swift in Sources */,
 				8565BEDA298FC48500CBD52B /* Grid.swift in Sources */,
+				858210A329D99DB9008394E0 /* WidgetResult.swift in Sources */,
 				859EDF0429912576002FFE35 /* WeatherNetworkType.swift in Sources */,
 				85AEBA552995DB3C0057BE2C /* HourWeatherView.swift in Sources */,
 				85AEBA5A2995DDD80057BE2C /* WeatherViewModel.swift in Sources */,

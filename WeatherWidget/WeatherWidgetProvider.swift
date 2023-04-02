@@ -30,7 +30,7 @@ struct Provider: IntentTimelineProvider {
             // Generate a timeline consisting of five entries an hour apart, starting from the current date.
             let refreshTime = result.bool ? 20 : 3
             let currentDate = Date()
-            let entryDate = Calendar.current.date(byAdding: .minute, value: 5, to: currentDate)!
+            let entryDate = Calendar.current.date(byAdding: .minute, value: refreshTime, to: currentDate)!
             let entry = SimpleEntry(date: entryDate, image: "moon", text: "\(result.value)")
             let timeline = Timeline(entries: [entry], policy: .atEnd)
             completion(timeline)
