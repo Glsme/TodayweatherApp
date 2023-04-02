@@ -20,28 +20,36 @@ final class WidgetViewModel {
         return f
     }()
     
-    func getLocation(completionHandler: @escaping (String) -> Void) {
+    func getLocation(completionHandler: @escaping (WidgetResult) -> Void) {
         do {
             let locationManager = WidgetLocationManager()
             let coordinate = try locationManager.updateLocation()
             requestUltraSrtNcst(coordinate: coordinate) { first in
-                self.requestUltraSrtFcst(coordinate: coordinate) { second in
-                    completionHandler(first + "\n" + second)
+                if first.bool {
+                    self.requestUltraSrtFcst(coordinate: coordinate) { second in
+                        if second.bool {
+                            completionHandler(.init(bool: true, value: first.value + " \n" + second.value))
+                        } else {
+                            completionHandler(.init(bool: false, value: second.value))
+                        }
+                    }
+                } else {
+                    completionHandler(.init(bool: false, value: first.value))
                 }
             }
             
         } catch LocationError.optionalBindError {
-            completionHandler("데이터를 가져오는 중입니다.")
+            completionHandler(.init(bool: false, value: "데이터를 가져오는 중입니다."))
         } catch LocationError.AuthError {
-            completionHandler("위젯 사용을 위해 위치 권한을 허용해주세요")
+            completionHandler(.init(bool: false, value: "위젯 사용을 위해 위치 권한을 허용해주세요"))
         } catch {
-            completionHandler("에러가 발생하였습니다. 잠시 기다려주세요")
+            completionHandler(.init(bool: false, value: "에러가 발생하였습니다. 잠시 기다려주세요"))
         }
     }
     
     private func requestUltraSrtNcst(date: Date = Date(),
                                      coordinate: CLLocationCoordinate2D,
-                                     completionHandler: @escaping (String) -> Void) {
+                                     completionHandler: @escaping (WidgetResult) -> Void) {
         let date = convertUltraSrtNcst(Date())
         let dateArray = dateFormatter.string(from: date).split(separator: " ")
         let grid = convertGrid(coordinate)
@@ -54,19 +62,20 @@ final class WidgetViewModel {
                 let items = data.response.body.items.item
                 items.forEach {
                     if $0.category == "T1H" {
-                        completionHandler($0.obsrValue + " º")
+                        let temp = $0.obsrValue + " º"
+                        completionHandler(.init(bool: true, value: temp))
                         return
                     }
                 }
             case .failure(_):
-                completionHandler("에러가 발생하였습니다. 잠시 기다려주세요")
+                completionHandler(.init(bool: false, value: "에러가 발생하였습니다. 잠시 기다려주세요"))
             }
         }
     }
     
     private func requestUltraSrtFcst(date: Date = Date(),
                                      coordinate: CLLocationCoordinate2D,
-                                     completionHandler: @escaping (String) -> Void) {
+                                     completionHandler: @escaping (WidgetResult) -> Void) {
         let date = convertUltraSrtFcst(date)
         let dateArray = dateFormatter.string(from: date).split(separator: " ")
         let grid = convertGrid(coordinate)
@@ -80,13 +89,13 @@ final class WidgetViewModel {
                 let items = data.response.body.items.item
                 
                 for item in items where item.category == "RN1" && item.fcstValue != "강수없음" {
-                    completionHandler("비올 수 있으니깐\n우산챙기세요!")
+                    completionHandler(.init(bool: true, value: "비올 수 있으니깐\n우산챙기세요!"))
                     return
                 }
                 
-                completionHandler("비안와요~")
+                completionHandler(.init(bool: true, value: "비안와요~"))
             case .failure(_):
-                completionHandler("에러가 발생하였습니다. 잠시 기다려주세요")
+                completionHandler(.init(bool: false, value: "에러가 발생하였습니다. 잠시 기다려주세요"))
             }
         }
     }

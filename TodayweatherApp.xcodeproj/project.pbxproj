@@ -70,6 +70,7 @@
 		85C42F7C29BB11C100FBC470 /* SUIT-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85AEBA6F2996474B0057BE2C /* SUIT-SemiBold.ttf */; };
 		85C42F7D29BB11C300FBC470 /* SUIT-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85AEBA6D299647430057BE2C /* SUIT-Medium.ttf */; };
 		85C42F7E29BB11C500FBC470 /* SUIT-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 85AEBA6B299647340057BE2C /* SUIT-Bold.ttf */; };
+		85DA656629D99737000367CA /* WidgetResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85DA656429D99715000367CA /* WidgetResult.swift */; };
 		85E226E929B1F4EE00BFCB8A /* WeatherImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85E226E829B1F4EE00BFCB8A /* WeatherImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +145,7 @@
 		85AEBA762997C9100057BE2C /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		85AEBA802997DDD40057BE2C /* CurrentWeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeatherView.swift; sourceTree = "<group>"; };
 		85B412A029A8A7BF003516AE /* View+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extension.swift"; sourceTree = "<group>"; };
+		85DA656429D99715000367CA /* WidgetResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetResult.swift; sourceTree = "<group>"; };
 		85E226E829B1F4EE00BFCB8A /* WeatherImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +191,7 @@
 				854316E1299BC29900A3686B /* Assets.xcassets */,
 				854316E3299BC29900A3686B /* Info.plist */,
 				854F2B4E29A31DE900F80A6A /* WidgetViewModel.swift */,
+				85DA656429D99715000367CA /* WidgetResult.swift */,
 			);
 			path = WeatherWidget;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				854F2B4D29A30C2E00F80A6A /* Notification.Name+Extension.swift in Sources */,
 				854316DF299BC29800A3686B /* WeatherWidget.swift in Sources */,
 				854F2B4929A301B100F80A6A /* LocationManager.swift in Sources */,
+				85DA656629D99737000367CA /* WidgetResult.swift in Sources */,
 				854F2B3529A20C6500F80A6A /* GeoConverter.swift in Sources */,
 				854F2B2229A2086600F80A6A /* APIKey.swift in Sources */,
 				85B412A229A8A934003516AE /* View+Extension.swift in Sources */,
