@@ -17,6 +17,7 @@ struct HourWeatherItem: View {
             Image(weatherData.img.rawValue)
                 .resizable()
                 .frame(width: 50, height: 50)
+                .animation(.easeInOut(duration: 2), value: true)
             Text(weatherData.temp)
                 .modifier(TempTextModifier())
         }

@@ -16,7 +16,6 @@ struct WeatherHome: View {
         
         ZStack {
             VStack(spacing: .zero) {
-                
                 ZStack {
                     LinearGradient(colors: [Color(red: 167/255, green: 219/255, blue: 255/255),
                                             Color(red: 134/255, green: 179/255, blue: 211/255)],

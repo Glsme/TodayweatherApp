@@ -11,6 +11,7 @@ struct TempTextModifier: ViewModifier {
     func body(content: Content) -> some View {
         content
             .font(.custom(Fonts.bold.rawValue, size: 16))
+            .frame(height: 18)
     }
 }
 
@@ -19,6 +20,7 @@ struct LocationTextModifier: ViewModifier {
         content
             .font(.custom(Fonts.bold.rawValue, size: 16))
             .foregroundColor(.white)
+            .frame(height: 18)
     }
 }
 
