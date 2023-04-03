@@ -15,12 +15,12 @@ struct Provider: IntentTimelineProvider {
     let viewModel = WidgetViewModel()
     // 특정 내용이 없는 시각적 표현
     func placeholder(in context: Context) -> WeatherData {
-        WeatherData(date: Date(), text: "")
+        WeatherData(date: Date(), text: "현재 온도와 비 소식을 보여줍니다.")
     }
     
     // WidgetKit이 위젯이 일시적인 상황에 나타나면 호출하는 함수
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (WeatherData) -> ()) {
-        let entry = WeatherData(date: Date(), text: "")
+        let entry = WeatherData(date: Date(), text: "현재 온도와 비 소식을 보여줍니다.")
         completion(entry)
     }
     
