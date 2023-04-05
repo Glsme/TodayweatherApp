@@ -68,7 +68,7 @@ final class WidgetViewModel {
                     }
                 }
             case .failure(_):
-                completionHandler(.init(bool: false, value: "기타 에러가 발생하였습니다. 잠시 기다려주세요"))
+                completionHandler(.init(bool: false, value: "네트워크 에러(실황)이 발생하였습니다. 잠시 기다려주세요"))
             }
         }
     }
@@ -89,13 +89,13 @@ final class WidgetViewModel {
                 let items = data.response.body.items.item
                 
                 for item in items where item.category == "RN1" && item.fcstValue != "강수없음" {
-                    completionHandler(.init(bool: true, value: "비올 수 있으니깐\n우산챙기세요!"))
+                    completionHandler(.init(bool: true, value: "비올 수 있으니\n우산챙기세요!"))
                     return
                 }
                 
                 completionHandler(.init(bool: true, value: "비안와요~"))
             case .failure(_):
-                completionHandler(.init(bool: false, value: "네트워크 에러가 발생하였습니다. 잠시 기다려주세요"))
+                completionHandler(.init(bool: false, value: "네트워크 에러(초단기)가 발생하였습니다. 잠시 기다려주세요"))
             }
         }
     }
