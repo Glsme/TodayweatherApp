@@ -68,7 +68,7 @@ final class WidgetViewModel {
                     }
                 }
             case .failure(_):
-                completionHandler(.init(bool: false, value: "에러가 발생하였습니다. 잠시 기다려주세요"))
+                completionHandler(.init(bool: false, value: "기타 에러가 발생하였습니다. 잠시 기다려주세요"))
             }
         }
     }
@@ -95,7 +95,7 @@ final class WidgetViewModel {
                 
                 completionHandler(.init(bool: true, value: "비안와요~"))
             case .failure(_):
-                completionHandler(.init(bool: false, value: "에러가 발생하였습니다. 잠시 기다려주세요"))
+                completionHandler(.init(bool: false, value: "네트워크 에러가 발생하였습니다. 잠시 기다려주세요"))
             }
         }
     }
