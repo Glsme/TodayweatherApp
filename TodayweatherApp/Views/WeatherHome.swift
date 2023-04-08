@@ -38,6 +38,7 @@ struct WeatherHome: View {
                             } label: {
                                 Image(systemName: "arrow.counterclockwise")
                             }
+                            .disabled(viewModel.isUpdateded)
                         }
                         .padding(.trailing)
                         Spacer()
