@@ -67,8 +67,8 @@ final class WidgetViewModel {
                         return
                     }
                 }
-            case .failure(_):
-                completionHandler(.init(bool: false, value: "네트워크 에러(실황)이 발생하였습니다. 잠시 기다려주세요"))
+            case .failure(let error):
+                completionHandler(.init(bool: false, value: "실황: \(error.localizedDescription)"))
             }
         }
     }
@@ -94,8 +94,8 @@ final class WidgetViewModel {
                 }
                 
                 completionHandler(.init(bool: true, value: "비안와요~"))
-            case .failure(_):
-                completionHandler(.init(bool: false, value: "네트워크 에러(초단기)가 발생하였습니다. 잠시 기다려주세요"))
+            case .failure(let error):
+                completionHandler(.init(bool: false, value: "초단기: \(error.localizedDescription)"))
             }
         }
     }
