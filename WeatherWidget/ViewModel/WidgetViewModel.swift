@@ -68,7 +68,7 @@ final class WidgetViewModel {
                     }
                 }
             case .failure(let error):
-                completionHandler(.init(bool: false, value: "실황: \(error.localizedDescription)"))
+                completionHandler(.init(bool: false, value: "실황:\(error)"))
             }
         }
     }
@@ -95,7 +95,7 @@ final class WidgetViewModel {
                 
                 completionHandler(.init(bool: true, value: "비안와요~"))
             case .failure(let error):
-                completionHandler(.init(bool: false, value: "초단기: \(error.localizedDescription)"))
+                completionHandler(.init(bool: false, value: "초단기\(error)"))
             }
         }
     }

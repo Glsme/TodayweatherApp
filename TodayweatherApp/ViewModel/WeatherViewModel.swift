@@ -119,11 +119,11 @@ final class WeatherViewModel: NSObject, ObservableObject {
         }
     }
     
-//        private func requestUltraSrtFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
-//            network.requestUltraSrtFcst(date: date, coordinate: coordinate) { result in
-//                print("success")
-//            }
-//        }
+        private func requestUltraSrtFcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
+            network.requestUltraSrtFcst(date: date, coordinate: coordinate) { result in
+                print("success")
+            }
+        }
     
     private func requestUltraSrtNcst(date: Date = Date(), coordinate: CLLocationCoordinate2D) {
         network.requestUltraSrtNcst(date: date, coordinate: coordinate) { [weak self] result in
