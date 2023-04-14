@@ -28,7 +28,7 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<WeatherData>) -> ()) {
         viewModel.getLocation { result in
             // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-            let refreshTime = result.bool ? 20 : 3
+            let refreshTime = 1// result.bool ? 20 : 3
             let currentDate = Date()
             let entryDate = Calendar.current.date(byAdding: .minute, value: refreshTime, to: currentDate)!
             let entry = WeatherData(date: entryDate, text: "\(result.value)")
