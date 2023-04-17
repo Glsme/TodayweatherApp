@@ -24,12 +24,13 @@ final class WidgetViewModel {
         do {
             let locationManager = WidgetLocationManager()
             let coordinate = try locationManager.updateLocation()
-            Task {
-                let value = try await requestUltraSrtNcstWithURLSession(coordinate: coordinate)
-                completionHandler(.init(bool: true, value: value))
-            }
-//            requestUltraSrtNcst(coordinate: coordinate) { first in
-//                if first.bool {
+//            Task {
+//                let value = try await requestUltraSrtNcstWithURLSession(coordinate: coordinate)
+//                completionHandler(.init(bool: true, value: value))
+//            }
+            requestUltraSrtNcst(coordinate: coordinate) { first in
+                if first.bool {
+                    completionHandler(.init(bool: first.bool, value: first.value))
 //                    self.requestUltraSrtFcst(coordinate: coordinate) { second in
 //                        if second.bool {
 //                            completionHandler(.init(bool: true, value: first.value + " \n" + second.value))
@@ -37,10 +38,10 @@ final class WidgetViewModel {
 //                            completionHandler(.init(bool: false, value: second.value))
 //                        }
 //                    }
-//                } else {
-//                    completionHandler(.init(bool: false, value: first.value))
-//                }
-//            }
+                } else {
+                    completionHandler(.init(bool: false, value: first.value))
+                }
+            }
             
         } catch LocationError.optionalBindError {
             completionHandler(.init(bool: false, value: "데이터를 가져오는 중입니다."))
