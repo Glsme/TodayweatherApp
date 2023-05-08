@@ -24,20 +24,15 @@ final class WidgetViewModel {
         do {
             let locationManager = WidgetLocationManager()
             let coordinate = try locationManager.updateLocation()
-//            Task {
-//                let value = try await requestUltraSrtNcstWithURLSession(coordinate: coordinate)
-//                completionHandler(.init(bool: true, value: value))
-//            }
             requestUltraSrtNcst(coordinate: coordinate) { first in
                 if first.bool {
-                    completionHandler(.init(bool: first.bool, value: first.value))
-//                    self.requestUltraSrtFcst(coordinate: coordinate) { second in
-//                        if second.bool {
-//                            completionHandler(.init(bool: true, value: first.value + " \n" + second.value))
-//                        } else {
-//                            completionHandler(.init(bool: false, value: second.value))
-//                        }
-//                    }
+                    self.requestUltraSrtFcst(coordinate: coordinate) { second in
+                        if second.bool {
+                            completionHandler(.init(bool: true, value: first.value + " \n" + second.value))
+                        } else {
+                            completionHandler(.init(bool: false, value: second.value))
+                        }
+                    }
                 } else {
                     completionHandler(.init(bool: false, value: first.value))
                 }
@@ -78,26 +73,12 @@ final class WidgetViewModel {
         }
     }
     
-    private func requestUltraSrtNcstWithURLSession(date: Date = Date(),
-                                                   coordinate: CLLocationCoordinate2D) async throws -> String {
-        let date = convertUltraSrtNcst(Date())
-        let dateArray = dateFormatter.string(from: date).split(separator: " ")
-        let grid = convertGrid(coordinate)
-        let url: String = "\(EndPoint.ultraSrtNcstURL)" + "getUltraSrtNcst?" + "base_date=\(dateArray[0])&" + "base_time=\(dateArray[1])&" + "dataType=JSON&" + "numOfRows=100&" + "pageNo=1&" + "nx=\(Int(grid.nx))&" + "ny=\(Int(grid.ny))&" + "serviceKey=\(APIKey.encodingKey)"
-//        let header: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", "accept": "application/json"]
-        
-        let (data, _) = try await URLSession.shared.data(from: URL(string: url)!)
-        let response = try JSONDecoder().decode(UltraSrtNcst.self, from: data)
-        return "\(response)"
-    }
-    
     private func requestUltraSrtFcst(date: Date = Date(),
                                      coordinate: CLLocationCoordinate2D,
                                      completionHandler: @escaping (WidgetResult) -> Void) {
         let date = convertUltraSrtFcst(date)
         let dateArray = dateFormatter.string(from: date).split(separator: " ")
         let grid = convertGrid(coordinate)
-        
         let url: String = "\(EndPoint.ultraSrtNcstURL)" + "getUltraSrtFcst?" + "base_date=\(dateArray[0])&" + "base_time=\(dateArray[1])&" + "dataType=JSON&" + "numOfRows=100&" + "pageNo=1&" + "nx=\(Int(grid.nx))&" + "ny=\(Int(grid.ny))&" + "serviceKey=\(APIKey.encodingKey)"
         let header: HTTPHeaders = ["Content-Type": "application/x-www-form-urlencoded", "accept": "application/json"]
         

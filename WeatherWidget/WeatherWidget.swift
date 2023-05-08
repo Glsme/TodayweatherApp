@@ -17,17 +17,15 @@ struct WeatherWidgetEntryView : View {
     var body: some View {
         switch family {
         case .accessoryRectangular:
-            ZStack {
-                Text("\(entry.text)")
-                    .font(.custom(Fonts.bold.rawValue, size: 10))
-                    .foregroundColor(.white)
-            }
+            Text("\(entry.text)")
+                .font(.custom(Fonts.bold.rawValue, size: 12))
+                .foregroundColor(.white)
         default:
             ZStack {
                 Color.black
                 VStack {
                     Text("\(entry.text)")
-                        .font(.custom(Fonts.bold.rawValue, size: 10))
+                        .font(.custom(Fonts.bold.rawValue, size: 12))
                         .foregroundColor(.white)
                 }
             }
