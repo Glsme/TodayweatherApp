@@ -44,7 +44,8 @@
 ## 💡 Trouble Shooting
 
 - URLConvertible 내 Encoding issue
-URLConvertible 내 Encoding structure 중 `.addingPercentEncoding`을 필연적으로 사용하여 APIKey Error가 발생
+URLConvertible 내 Encoding structure 중,
+`.addingPercentEncoding`을 필연적으로 사용하여 APIKey Error가 발생
 
     → Encoding structure custom하여 관련 메서드를 사용하지 않는 방향으로 설정
     
@@ -52,7 +53,7 @@ URLConvertible 내 Encoding structure 중 `.addingPercentEncoding`을 필연적�
     
 
 [관련 이슈 링크](https://github.com/Glsme/TodayweatherApp/issues/1)
-```
+
 </br><br/>
 - Widget 사용 시 간헐적인 API 호출 에러 발생
     
