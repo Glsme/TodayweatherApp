@@ -74,7 +74,8 @@ extension LocationManager: CLLocationManagerDelegate {
     }
     
     // 사용자 위치 변환 및 저장
-    func checkUserCurrentLocation(_ coordinate: CLLocationCoordinate2D, completionHandler: @escaping (String, String) -> Void) {
+    func checkUserCurrentLocation(_ coordinate: CLLocationCoordinate2D,
+                                  completionHandler: @escaping (String, String) -> Void) {
         print(#function)
         
         let findLocation: CLLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
