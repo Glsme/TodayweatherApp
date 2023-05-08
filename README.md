@@ -57,7 +57,9 @@ URLConvertible 내 Encoding structure 중,
 </br><br/>
 - Widget 사용 시 간헐적인 API 호출 에러 발생
     
-    → 테스트 시 API 2개 이상 동시 호출 시 공공 데이터 포털 내 데이터 전달 오류로 확인
+    → Widget 테스트로 API 2개 이상 동시 호출 시 공공 데이터 포털 내 데이터 전달 오류로 확인
+    
+    → API 2개 이상 호출 시 에러 발생에 대하여 1분 후 재요청 로직 추가
 
 
 </br><br/>
